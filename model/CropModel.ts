@@ -5,5 +5,5 @@ export class CropModel {
     category!:String;
     season!:String;
     fieldId!:String;
-    image!:String;
+    image!:Buffer;
 }

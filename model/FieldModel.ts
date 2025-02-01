@@ -3,6 +3,6 @@ export class FieldModel {
     name!: String;
     location!: String;
     extentSize!: String;
-    image1!: String;
-    image2!: String;
+    image1!: Buffer;
+    image2!: Buffer;
 }

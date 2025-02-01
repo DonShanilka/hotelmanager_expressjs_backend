@@ -6,7 +6,7 @@ export class StaffModel {
   gender!: String;
   joinedDate!: Date;
   dateOfBirth!: Date;
-  mobile!: String;
+  mobile!: Number;
   email!: String;
   role!: String;
   address1!: String;
