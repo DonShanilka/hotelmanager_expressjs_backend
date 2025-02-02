@@ -36,8 +36,18 @@ model EquipmentModel {
   id String @id;
   name String;
   type String;
-  count String;
+  count Int;
   status String;
   staffId String;
   fieldId String;  
+}
+
+model VehicalModel {
+  id String @id;
+    lPlate String;
+    category String;
+    fuleType String;
+    status String;
+    remarks String;
+    staffId String;  
 }
