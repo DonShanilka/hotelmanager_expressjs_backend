@@ -51,3 +51,22 @@ model VehicalModel {
     remarks String;
     staffId String;  
 }
+
+model StaffModel {
+  id String @id;
+  firstName String;
+  lastName String;
+  designation String;
+  gender String;
+  joinedDate Date;
+  dateOfBirth Date;
+  mobile Int;
+  email  String @unique;
+  role String;
+  address1 String;
+  address2 String;
+  address3 String;
+  address4 String;
+  address5 String;
+  fieldId String;  
+}
