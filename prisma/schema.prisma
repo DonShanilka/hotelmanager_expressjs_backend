@@ -20,4 +20,14 @@ model FieldModel {
     extentSize String;
     image1  Bytes;
     image2  Bytes;
-}                                                                                                       
+}  
+
+model CropModel {
+  id String @id;
+  name String;
+  scientificName String;
+  category String;
+  season String;
+  fieldId String;
+  image Bytes;
+}
