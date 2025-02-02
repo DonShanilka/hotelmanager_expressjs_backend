@@ -14,59 +14,117 @@ datasource db {
 }
 
 model FieldModel {
-    id String @id;
-    name String;
-    location String;
-    extentSize String;
-    image1  Bytes;
-    image2  Bytes;
-}  
+  id         String  @id @default(cuid()) // Unique ID with automatic generation
+  name       String
+  location   String
+  extentSize String
+  image1     String  
+  image2     String  
+
+  crops      CropModel[]      
+  equipment  EquipmentModel[] 
+  staff      StaffModel[]     
+  logs       FieldLog[] // ✅ Changed to explicit many-to-many relation
+}    
 
 model CropModel {
-  id String @id;
-  name String;
-  scientificName String;
-  category String;
-  season String;
-  fieldId String;
-  image Bytes;
+  id             String  @id @default(cuid())
+  name           String
+  scientificName String
+  category       String
+  season         String
+  fieldId        String
+  image          String
+
+  field         FieldModel @relation(fields: [fieldId], references: [id]) 
+  logs          CropLog[] // ✅ Changed to explicit many-to-many relation
 }
 
 model EquipmentModel {
-  id String @id;
-  name String;
-  type String;
-  count Int;
-  status String;
-  staffId String;
-  fieldId String;  
+  id       String @id @default(cuid())
+  name     String
+  type     String
+  count    Int
+  status   String
+  staffId  String?
+  fieldId  String?
+
+  field    FieldModel? @relation(fields: [fieldId], references: [id])
+  staff    StaffModel? @relation(fields: [staffId], references: [id])
 }
 
 model VehicalModel {
-  id String @id;
-    lPlate String;
-    category String;
-    fuleType String;
-    status String;
-    remarks String;
-    staffId String;  
+  id        String @id @default(cuid())
+  lPlate    String @unique 
+  category  String
+  fuelType  String 
+  status    String
+  remarks   String?
+  staffId   String?
+
+  staff     StaffModel? @relation(fields: [staffId], references: [id])
 }
 
 model StaffModel {
-  id String @id;
-  firstName String;
-  lastName String;
-  designation String;
-  gender String;
-  joinedDate Date;
-  dateOfBirth Date;
-  mobile Int;
-  email  String @unique;
-  role String;
-  address1 String;
-  address2 String;
-  address3 String;
-  address4 String;
-  address5 String;
-  fieldId String;  
+  id          String  @id @default(cuid())
+  firstName   String
+  lastName    String
+  designation String
+  gender      String
+  joinedDate  DateTime
+  dateOfBirth DateTime
+  mobile      BigInt 
+  email       String  @unique
+  role        String
+  address1    String
+  address2    String?
+  address3    String?
+  address4    String?
+  address5    String?
+  fieldId     String?
+
+  field       FieldModel? @relation(fields: [fieldId], references: [id])
+  equipment   EquipmentModel[]
+  vehicles    VehicalModel[]
+  logs        StaffLog[] // ✅ Changed to explicit many-to-many relation
 }
+
+model LogModel {
+  logCode    String   @id @map("log_code") // PRIMARY KEY
+  logDate    DateTime
+  logDetails String   
+  image      String   @db.LongText
+
+  fields     FieldLog[] 
+  crops      CropLog[]  
+  staffs     StaffLog[] 
+}  
+
+// ✅ Explicit many-to-many relation tables
+model FieldLog {
+  fieldId String
+  logCode String
+  field   FieldModel @relation(fields: [fieldId], references: [id])
+  log     LogModel   @relation(fields: [logCode], references: [logCode])
+
+  @@id([fieldId, logCode]) // Composite primary key
+}
+
+model CropLog {
+  cropId  String
+  logCode String
+  crop    CropModel @relation(fields: [cropId], references: [id])
+  log     LogModel  @relation(fields: [logCode], references: [logCode])
+
+  @@id([cropId, logCode]) // Composite primary key
+}
+
+model StaffLog {
+  staffId String
+  logCode String
+  staff   StaffModel @relation(fields: [staffId], references: [id])
+  log     LogModel   @relation(fields: [logCode], references: [logCode])
+
+  @@id([staffId, logCode]) // Composite primary key
+}
+
