@@ -12,4 +12,12 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-                                                                                                             
+
+model FieldModel {
+    id String @id;
+    name String;
+    location String;
+    extentSize String;
+    image1  Bytes;
+    image2  Bytes;
+}                                                                                                       
