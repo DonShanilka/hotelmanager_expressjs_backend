@@ -31,3 +31,13 @@ model CropModel {
   fieldId String;
   image Bytes;
 }
+
+model EquipmentModel {
+  id String @id;
+  name String;
+  type String;
+  count String;
+  status String;
+  staffId String;
+  fieldId String;  
+}
