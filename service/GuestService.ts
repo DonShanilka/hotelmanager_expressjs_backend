@@ -51,3 +51,13 @@ export async function GuestDelete(id : string) {
     console.log("Error", error);
   }
 }
+
+export async function getAllGuest() {
+  try {
+    const allGuest = await prisma.guest.findMany();
+    console.log("All Guest: ", allGuest);
+    return allGuest;
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
