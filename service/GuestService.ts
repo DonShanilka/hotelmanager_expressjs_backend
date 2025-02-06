@@ -20,3 +20,23 @@ export async function GuestAdd(guest : Guest) {
   }
 }
 
+export async function GuestUpdate(guest: Guest) {
+  try {
+    const guestUpdate = await prisma.guest.update({
+      where: {id : guest.guestId},
+      date : {
+        guestName: guest.guestName,
+        contactNumber: guest.contactNumber,
+        email: guest.email,
+        roomNumber: guest.roomNumber,
+        checkInDate: guest.checkInDate,
+        checkOutDate: guest.checkOutDate,
+        nation: guest.nation,
+      }
+    })
+    alert("Success Fully Updated Guest: ");
+    console.log("Success Fully Updated Guest: ", guestUpdate);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
