@@ -8,9 +8,10 @@ export class Guest {
   contactNumber !: string;
   email !: string;
   roomNumber !: string;
-  checkInDate !: Date;
-  checkOutDate !: Date;
+  checkInDate !: string;
+  checkOutDate !: string;
   nation !: string;
+
   accusations !: Accusation | null;
   bookings !: Booking[];
   payments !: Payment[];

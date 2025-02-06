@@ -13,8 +13,8 @@ model Guest {
   contactNumber String
   email         String   @unique
   roomNumber    String
-  checkInDate   DateTime
-  checkOutDate  DateTime
+  checkInDate   String
+  checkOutDate  String
   nation        String
 
   accusations  Accusation?

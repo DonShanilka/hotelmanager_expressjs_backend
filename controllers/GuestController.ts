@@ -12,7 +12,7 @@ exports.save = async (req : any, res : any) => {
     const addGuest = await GuestAdd(guest);
     res.status(200).json(addGuest);
   } catch (error) {
-    console.error("Error Adding Customer: ", error);
+    console.error("Error Adding Guest: ", error);
     res.status(400).send("Error Adding Guest")
   }
 };
