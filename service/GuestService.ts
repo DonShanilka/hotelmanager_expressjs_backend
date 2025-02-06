@@ -40,3 +40,14 @@ export async function GuestUpdate(guest: Guest) {
     console.log("Error", error);
   }
 }
+
+export async function GuestDelete(id : string) {
+  try {
+    await prisma.guest.delete({
+      where: {id : id}
+    });
+    console.log("Success Fully Deleted Guest: ");
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
