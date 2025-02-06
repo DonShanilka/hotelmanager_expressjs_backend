@@ -14,8 +14,9 @@ export async function GuestAdd(guest : Guest) {
         nation: guest.nation,
       }
     })
-    console.log("Add Customer", newGuest);
+    console.log("Success Fully Added Guest: ", newGuest);
   } catch (error) {
-    console.log(error);
+    console.log("Error",error);
   }
 }
+
