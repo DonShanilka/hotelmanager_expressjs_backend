@@ -1,10 +1,17 @@
+import { Accusation } from "./Accusation";
+import { Booking } from "./Booking";
+import { Payment } from "./Payment";
+
 export class Guest {
-  guestId !: string;
+  guestId !: number;
   guestName !: string;
-  contactNumber !: number;
+  contactNumber !: string;
   email !: string;
   roomNumber !: string;
-  checkInDate !: string;
-  checkOutDate !: string;
+  checkInDate !: Date;
+  checkOutDate !: Date;
   nation !: string;
+  accusations !: Accusation | null;
+  bookings !: Booking[];
+  payments !: Payment[];
 }

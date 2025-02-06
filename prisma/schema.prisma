@@ -13,118 +13,123 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model FieldModel {
-  id         String  @id @default(cuid()) // Unique ID with automatic generation
-  name       String
-  location   String
-  extentSize String
-  image1     String  
-  image2     String  
-
-  crops      CropModel[]      
-  equipment  EquipmentModel[] 
-  staff      StaffModel[]     
-  logs       FieldLog[] // ✅ Changed to explicit many-to-many relation
-}    
-
-model CropModel {
-  id             String  @id @default(cuid())
-  name           String
-  scientificName String
-  category       String
-  season         String
-  fieldId        String
-  image          String
-
-  field         FieldModel @relation(fields: [fieldId], references: [id]) 
-  logs          CropLog[] // ✅ Changed to explicit many-to-many relation
+generator client {
+  provider = "prisma-client-js"
 }
 
-model EquipmentModel {
-  id       String @id @default(cuid())
-  name     String
-  type     String
-  count    Int
-  status   String
-  staffId  String?
-  fieldId  String?
-
-  field    FieldModel? @relation(fields: [fieldId], references: [id])
-  staff    StaffModel? @relation(fields: [staffId], references: [id])
+datasource db {
+  provider = "mysql" // Change to "postgresql" or "sqlite" if needed
+  url      = env("DATABASE_URL")
 }
 
-model VehicalModel {
-  id        String @id @default(cuid())
-  lPlate    String @unique 
-  category  String
-  fuelType  String 
-  status    String
-  remarks   String?
-  staffId   String?
+model Guest {
+  guestId       Int     @id @default(autoincrement())
+  guestName     String
+  contactNumber String
+  email         String  @unique
+  roomNumber    String
+  checkInDate   DateTime
+  checkOutDate  DateTime
+  nation        String
 
-  staff     StaffModel? @relation(fields: [staffId], references: [id])
+  accusations   Accusation?
+  bookings      Booking[]
+  payments      Payment[]
 }
 
-model StaffModel {
-  id          String  @id @default(cuid())
-  firstName   String
-  lastName    String
-  designation String
-  gender      String
-  joinedDate  DateTime
-  dateOfBirth DateTime
-  mobile      BigInt 
-  email       String  @unique
-  role        String
-  address1    String
-  address2    String?
-  address3    String?
-  address4    String?
-  address5    String?
-  fieldId     String?
+model Accusation {
+  accusationId Int    @id @default(autoincrement())
+  reportType   String
+  guestId      Int    @unique
+  description  String
 
-  field       FieldModel? @relation(fields: [fieldId], references: [id])
-  equipment   EquipmentModel[]
-  vehicles    VehicalModel[]
-  logs        StaffLog[] // ✅ Changed to explicit many-to-many relation
+  guest        Guest  @relation(fields: [guestId], references: [guestId])
 }
 
-model LogModel {
-  logCode    String   @id @map("log_code") // PRIMARY KEY
-  logDate    DateTime
-  logDetails String   
-  image      String   @db.LongText
+model Room {
+  roomNumber   String  @id
+  roomType     String
+  selectedImage String
+  hallFloor    Int
+  price        Decimal(10,2)
+  status       String
 
-  fields     FieldLog[] 
-  crops      CropLog[]  
-  staffs     StaffLog[] 
-}  
-
-// ✅ Explicit many-to-many relation tables
-model FieldLog {
-  fieldId String
-  logCode String
-  field   FieldModel @relation(fields: [fieldId], references: [id])
-  log     LogModel   @relation(fields: [logCode], references: [logCode])
-
-  @@id([fieldId, logCode]) // Composite primary key
+  bookings     Booking[]
+  payments     Payment[]
+  houseKeepings HouseKeeping[]
 }
 
-model CropLog {
-  cropId  String
-  logCode String
-  crop    CropModel @relation(fields: [cropId], references: [id])
-  log     LogModel  @relation(fields: [logCode], references: [logCode])
+model HouseKeeping {
+  houseKeepingId Int     @id @default(autoincrement())
+  roomNumber     String
+  cleaningDate   DateTime
+  status         String
+  specialTasks   String
 
-  @@id([cropId, logCode]) // Composite primary key
+  room           Room    @relation(fields: [roomNumber], references: [roomNumber])
 }
 
-model StaffLog {
-  staffId String
-  logCode String
-  staff   StaffModel @relation(fields: [staffId], references: [id])
-  log     LogModel   @relation(fields: [logCode], references: [logCode])
+model Payment {
+  paymentId         Int     @id @default(autoincrement())
+  guestId           Int
+  roomNumber        String
+  guestName         String
+  checkInDate       DateTime
+  checkOutDate      DateTime
+  totalNight        Int
+  roomPerNight      Decimal(10,2)
+  additionalCharges Decimal(10,2)
+  paymentMethod     String
+  cashReceive       Decimal(10,2)
+  createdAt         DateTime @default(now())
 
-  @@id([staffId, logCode]) // Composite primary key
+  guest             Guest   @relation(fields: [guestId], references: [guestId])
+  room              Room    @relation(fields: [roomNumber], references: [roomNumber])
 }
 
+model Booking {
+  bookingID     Int     @id @default(autoincrement())
+  guestID       Int
+  roomNumber    String
+  checkInDate   DateTime
+  checkOutDate  DateTime
+  totalAmount   Decimal(10,2)
+  totalNight    Int
+  bookingStatus BookingStatus @default(Confirmed)
+  createdAt     DateTime @default(now())
+
+  Guest         Guest  @relation(fields: [guestID], references: [guestId])
+  Room          Room   @relation(fields: [roomNumber], references: [roomNumber])
+  Payments      Payment[]
+  ServiceUsages ServiceUsage[]
+}
+
+enum BookingStatus {
+  Confirmed
+  Cancelled
+  CheckedOut
+}
+
+model Service {
+  serviceID   Int    @id @default(autoincrement())
+  serviceName String
+  servicePrice Decimal(10,2)
+  description String?
+  createdAt   DateTime @default(now())
+
+  serviceUsages ServiceUsage[]
+}
+
+model ServiceUsage {
+  usageID    Int     @id @default(autoincrement())
+  bookingID  Int
+  guestId    Int
+  serviceID  Int
+  quantity   Int
+  totalCost  Decimal(10,2)
+  usageDate  DateTime @default(now())
+
+  Booking    Booking @relation(fields: [bookingID], references: [bookingID])
+  Service    Service @relation(fields: [serviceID], references: [serviceID])
+  Guest      Guest   @relation(fields: [guestId], references: [guestId])
+}
