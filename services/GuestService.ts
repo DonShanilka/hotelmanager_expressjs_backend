@@ -20,11 +20,11 @@ export async function GuestAdd(guest : Guest) {
   }
 }
 
-export async function GuestUpdate(id : string,guest: Guest) {
+export async function GuestUpdate(id: number, guest: Guest) {
   try {
     const guestUpdate = await prisma.guest.update({
-      where: {id : id},
-      date : {
+      where: {guestId : id},
+      data : {
         guestName: guest.guestName,
         contactNumber: guest.contactNumber,
         email: guest.email,
@@ -41,10 +41,10 @@ export async function GuestUpdate(id : string,guest: Guest) {
   }
 }
 
-export async function GuestDelete(id : string) {
+export async function GuestDelete(id : number) {
   try {
     await prisma.guest.delete({
-      where: {id : id}
+      where: {guestId : id}
     });
     console.log("Success Fully Deleted Guest: ");
   } catch (error) {

@@ -4,7 +4,7 @@ import { Guest } from '../model/Guest';
 
 const router = express.Router();
 
-router.post("/add", async (req, res) => {
+exports.save = async (req : any, res : any) => {
   const guest = req.body;
   console.log("Received Guest: ", guest);
 
@@ -15,10 +15,10 @@ router.post("/add", async (req, res) => {
     console.error("Error Adding Customer: ", error);
     res.status(400).send("Error Adding Guest")
   }
-});
+};
 
-router.put("/update/:id", async (req, res) => {
-  const id:string = req.params.id;
+exports.update = async (req : any, res : any) => {
+  const id:number = req.params.id;
   console.log("Customer Id for Update: ", id);
   const guest : Guest = req.body;
 
@@ -28,10 +28,10 @@ router.put("/update/:id", async (req, res) => {
   } catch (error) {
     console.log("Error Update Guest: ", error);
   }
-});
+};
 
-router.delete("/delete/:id", async (req, res) => {
-  const id:string = req.params.id;
+exports.delete = async (req : any, res : any) => {
+  const id:number = req.params.id;
 
   try {
     await GuestDelete(id);
@@ -39,15 +39,15 @@ router.delete("/delete/:id", async (req, res) => {
   } catch (error) {
     console.log("Error Delete Guest", error);
   }
-});
+};
 
-router.get("/getAll", async (req, res) => {
+exports.getAll =  async (req : any, res : any) => {
   try {
     const guest = await getAllGuest();
     console.log(res.json(guest));
   } catch (error) {
     console.log("error Getting Guest", error);
   }
-});
+};
 
 export default router;
