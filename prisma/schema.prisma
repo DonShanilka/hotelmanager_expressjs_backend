@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Guest {
-  guestId       Int      @id @default(autoincrement())
+  guestId       String      @id 
   guestName     String
   contactNumber String
   email         String   @unique
@@ -17,7 +17,6 @@ model Guest {
   checkOutDate  String
   nation        String
 
-  accusations  Accusation?
   bookings     Booking[]
   payments     Payment[]
   ServiceUsage ServiceUsage[]
@@ -26,10 +25,8 @@ model Guest {
 model Accusation {
   accusationId Int    @id @default(autoincrement())
   reportType   String
-  guestId      Int    @unique
+  guestId      String    
   description  String
-
-  guest Guest @relation(fields: [guestId], references: [guestId])
 }
 
 model Room {
@@ -58,7 +55,7 @@ model HouseKeeping {
 
 model Payment {
   paymentId         Int      @id @default(autoincrement())
-  guestId           Int
+  guestId           String
   roomNumber        String
   guestName         String
   checkInDate       DateTime
@@ -78,7 +75,7 @@ model Payment {
 
 model Booking {
   bookingID     Int           @id @default(autoincrement())
-  guestID       Int
+  guestID       String
   roomNumber    String
   checkInDate   DateTime
   checkOutDate  DateTime
@@ -112,7 +109,7 @@ model Service {
 model ServiceUsage {
   usageID   Int      @id @default(autoincrement())
   bookingID Int
-  guestId   Int
+  guestId   String
   serviceID Int
   quantity  Int
   totalCost Decimal

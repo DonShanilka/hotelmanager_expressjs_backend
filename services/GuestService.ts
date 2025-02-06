@@ -5,6 +5,7 @@ export async function GuestAdd(guest: Guest) {
   try {
     const newGuest = await prisma.guest.create({
       data: {
+        guestId: guest.guestId,
         guestName: guest.guestName, 
         contactNumber: guest.contactNumber, 
         email: guest.email,
@@ -22,7 +23,7 @@ export async function GuestAdd(guest: Guest) {
   }
 }
 
-export async function GuestUpdate(id: number, guest: Guest) {
+export async function GuestUpdate(id: string, guest: Guest) {
   try {
 
     const existingGuest = await prisma.guest.findUnique({
@@ -52,7 +53,7 @@ export async function GuestUpdate(id: number, guest: Guest) {
   }
 }
 
-export async function GuestDelete(id : number) {
+export async function GuestDelete(id : string) {
   try {
 
     const existingGuest = await prisma.guest.findUnique({

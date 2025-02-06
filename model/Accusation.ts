@@ -5,5 +5,4 @@ export class Accusation {
   reportType !: string;
   guestId !: number;
   description !: string;
-  guest !: Guest;
 }

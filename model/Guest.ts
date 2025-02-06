@@ -3,7 +3,7 @@ import { Booking } from "./Booking";
 import { Payment } from "./Payment";
 
 export class Guest {
-  guestId !: number;
+  guestId !: string;
   guestName !: string;
   contactNumber !: string;
   email !: string;
@@ -12,7 +12,6 @@ export class Guest {
   checkOutDate !: string;
   nation !: string;
 
-  accusations !: Accusation | null;
   bookings !: Booking[];
   payments !: Payment[];
 }
