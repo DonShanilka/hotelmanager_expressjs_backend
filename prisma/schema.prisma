@@ -1,40 +1,26 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "mysql" // Change to "postgresql" or "sqlite" if needed
+  provider = "mysql" // Change to your database provider if needed
   url      = env("DATABASE_URL")
 }
 
 model Guest {
-  guestId       Int     @id @default(autoincrement())
+  guestId       Int      @id @default(autoincrement())
   guestName     String
   contactNumber String
-  email         String  @unique
+  email         String   @unique
   roomNumber    String
   checkInDate   DateTime
   checkOutDate  DateTime
   nation        String
 
-  accusations   Accusation?
-  bookings      Booking[]
-  payments      Payment[]
+  accusations  Accusation?
+  bookings     Booking[]
+  payments     Payment[]
+  ServiceUsage ServiceUsage[]
 }
 
 model Accusation {
@@ -43,63 +29,66 @@ model Accusation {
   guestId      Int    @unique
   description  String
 
-  guest        Guest  @relation(fields: [guestId], references: [guestId])
+  guest Guest @relation(fields: [guestId], references: [guestId])
 }
 
 model Room {
-  roomNumber   String  @id
-  roomType     String
+  roomNumber    String  @id
+  roomType      String
   selectedImage String
-  hallFloor    Int
-  price        Decimal(10,2)
-  status       String
+  hallFloor     Int
+  price         Decimal
+  status        String
 
-  bookings     Booking[]
-  payments     Payment[]
+  bookings      Booking[]
+  payments      Payment[]
   houseKeepings HouseKeeping[]
 }
 
 model HouseKeeping {
-  houseKeepingId Int     @id @default(autoincrement())
+  houseKeepingId Int      @id @default(autoincrement())
   roomNumber     String
   cleaningDate   DateTime
   status         String
   specialTasks   String
+  empId          Int
 
-  room           Room    @relation(fields: [roomNumber], references: [roomNumber])
+  room Room @relation(fields: [roomNumber], references: [roomNumber])
 }
 
 model Payment {
-  paymentId         Int     @id @default(autoincrement())
+  paymentId         Int      @id @default(autoincrement())
   guestId           Int
   roomNumber        String
   guestName         String
   checkInDate       DateTime
   checkOutDate      DateTime
   totalNight        Int
-  roomPerNight      Decimal(10,2)
-  additionalCharges Decimal(10,2)
+  roomPerNight      Decimal
+  additionalCharges Decimal
   paymentMethod     String
-  cashReceive       Decimal(10,2)
+  cashReceive       Decimal
   createdAt         DateTime @default(now())
 
-  guest             Guest   @relation(fields: [guestId], references: [guestId])
-  room              Room    @relation(fields: [roomNumber], references: [roomNumber])
+  guest            Guest    @relation(fields: [guestId], references: [guestId])
+  room             Room     @relation(fields: [roomNumber], references: [roomNumber])
+  Booking          Booking? @relation(fields: [bookingBookingID], references: [bookingID])
+  bookingBookingID Int?
 }
 
 model Booking {
-  bookingID     Int     @id @default(autoincrement())
+  bookingID     Int           @id @default(autoincrement())
   guestID       Int
   roomNumber    String
   checkInDate   DateTime
   checkOutDate  DateTime
-  totalAmount   Decimal(10,2)
+  totalAmount   Decimal
   totalNight    Int
   bookingStatus BookingStatus @default(Confirmed)
-  createdAt     DateTime @default(now())
+  createdAt     DateTime      @default(now())
 
-  Guest         Guest  @relation(fields: [guestID], references: [guestId])
-  Room          Room   @relation(fields: [roomNumber], references: [roomNumber])
+  Guest         Guest          @relation(fields: [guestID], references: [guestId])
+  Room          Room           @relation(fields: [roomNumber], references: [roomNumber])
   Payments      Payment[]
   ServiceUsages ServiceUsage[]
 }
@@ -111,25 +100,25 @@ enum BookingStatus {
 }
 
 model Service {
-  serviceID   Int    @id @default(autoincrement())
-  serviceName String
-  servicePrice Decimal(10,2)
-  description String?
-  createdAt   DateTime @default(now())
+  serviceID    Int      @id @default(autoincrement())
+  serviceName  String
+  servicePrice Decimal
+  description  String?
+  createdAt    DateTime @default(now())
 
   serviceUsages ServiceUsage[]
 }
 
 model ServiceUsage {
-  usageID    Int     @id @default(autoincrement())
-  bookingID  Int
-  guestId    Int
-  serviceID  Int
-  quantity   Int
-  totalCost  Decimal(10,2)
-  usageDate  DateTime @default(now())
+  usageID   Int      @id @default(autoincrement())
+  bookingID Int
+  guestId   Int
+  serviceID Int
+  quantity  Int
+  totalCost Decimal
+  usageDate DateTime @default(now())
 
-  Booking    Booking @relation(fields: [bookingID], references: [bookingID])
-  Service    Service @relation(fields: [serviceID], references: [serviceID])
-  Guest      Guest   @relation(fields: [guestId], references: [guestId])
+  Booking Booking @relation(fields: [bookingID], references: [bookingID])
+  Service Service @relation(fields: [serviceID], references: [serviceID])
+  Guest   Guest   @relation(fields: [guestId], references: [guestId])
 }
