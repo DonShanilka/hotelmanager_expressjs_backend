@@ -6,7 +6,7 @@ import { Service } from "./Service";
 
 export class Booking {
   bookingID !: number;
-  guestID !: number;
+  guestID !: string;
   roomNumber !: string;
   checkInDate !: Date;
   checkOutDate !: Date;

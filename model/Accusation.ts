@@ -3,6 +3,6 @@ import { Guest } from "./Guest";
 export class Accusation {
   accusationId !: number;
   reportType !: string;
-  guestId !: number;
+  guestId !: string;
   description !: string;
 }
