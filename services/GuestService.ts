@@ -24,6 +24,15 @@ export async function GuestAdd(guest: Guest) {
 
 export async function GuestUpdate(id: number, guest: Guest) {
   try {
+
+    const existingGuest = await prisma.guest.findUnique({
+      where: {guestId: id },
+    });
+
+    if (!existingGuest) {
+      throw new Error(`Guest with ID ${id} not found`);
+    }
+
     const guestUpdate = await prisma.guest.update({
       where: {guestId : id},
       data : {
@@ -36,7 +45,7 @@ export async function GuestUpdate(id: number, guest: Guest) {
         nation: guest.nation,
       }
     })
-    alert("Success Fully Updated Guest: ");
+    // alert("Success Fully Updated Guest: ");
     console.log("Success Fully Updated Guest: ", guestUpdate);
   } catch (error) {
     console.log("Error", error);
@@ -45,6 +54,15 @@ export async function GuestUpdate(id: number, guest: Guest) {
 
 export async function GuestDelete(id : number) {
   try {
+
+    const existingGuest = await prisma.guest.findUnique({
+      where: {guestId: id },
+    });
+
+    if (!existingGuest) {
+      throw new Error(`Guest with ID ${id} not found`);
+    }
+
     await prisma.guest.delete({
       where: {guestId : id}
     });
