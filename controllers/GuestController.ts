@@ -16,3 +16,16 @@ router.post("/add", async (req, res) => {
     res.status(400).send("Error Adding Guest")
   }
 });
+
+router.put("/update/:id", async (req, res) => {
+  const id:string = req.params.id;
+  console.log("Customer Id for Update: ", id);
+  const guest : Guest = req.body;
+
+  try {
+    await GuestUpdate(id, guest);
+    res.send("Guest Update")
+  } catch (error) {
+    console.log("Error Update Guest: ", error);
+  }
+});

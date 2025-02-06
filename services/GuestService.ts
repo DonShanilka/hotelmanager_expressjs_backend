@@ -20,10 +20,10 @@ export async function GuestAdd(guest : Guest) {
   }
 }
 
-export async function GuestUpdate(guest: Guest) {
+export async function GuestUpdate(id : string,guest: Guest) {
   try {
     const guestUpdate = await prisma.guest.update({
-      where: {id : guest.guestId},
+      where: {id : id},
       date : {
         guestName: guest.guestName,
         contactNumber: guest.contactNumber,
