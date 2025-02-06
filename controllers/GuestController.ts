@@ -29,3 +29,25 @@ router.put("/update/:id", async (req, res) => {
     console.log("Error Update Guest: ", error);
   }
 });
+
+router.delete("/delete/:id", async (req, res) => {
+  const id:string = req.params.id;
+
+  try {
+    await GuestDelete(id);
+    res.send("Guest Deleted");
+  } catch (error) {
+    console.log("Error Delete Guest", error);
+  }
+});
+
+router.get("/getAll", async (req, res) => {
+  try {
+    const guest = await getAllGuest();
+    console.log(res.json(guest));
+  } catch (error) {
+    console.log("error Getting Guest", error);
+  }
+});
+
+export default router;
