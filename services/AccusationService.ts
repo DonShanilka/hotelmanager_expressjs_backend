@@ -43,3 +43,11 @@ export async function AccusationDelete(id:number, accusation : Accusation) {
     console.log("Error Delete Accusation: ", error);
   }
 }
+
+export async function getAllAccusation() {
+  try {
+    return await prisma.accusation.findMany();
+  } catch(error) {
+    console.log("Error Geting Accusation", error);
+  }
+}
