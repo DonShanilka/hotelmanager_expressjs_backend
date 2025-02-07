@@ -17,7 +17,7 @@ exports.saveAccusation = async (req : any, res : any) => {
 };
 
 exports.updateAccusation = async (req : any, res : any) => {
-  const id : number = req.params.accusationId;
+  const id  = Number(req.params.id);
   console.log("Accusation Id For Update: ", id);
   const accusation : Accusation = req.body;
 
@@ -30,7 +30,7 @@ exports.updateAccusation = async (req : any, res : any) => {
 };
 
 exports.deleteAccusation = async (req : any, res : any) => {
-  const id : number = req.params.accusationId;
+  const id = Number(req.params.id);
 
   try {
     await AccusationDelete(id);
