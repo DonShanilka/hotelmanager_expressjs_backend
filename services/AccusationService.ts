@@ -20,7 +20,7 @@ export async function AccusationAdd(accusation : Accusation) {
 export async function AccusationUpdate (id: number, accusation : Accusation) {
   try {
     const accusationUpdate = await prisma.accusation.update({
-      where : {id : id},
+      where : {accusationId : id},
       data : {
         reportType : accusation.reportType,
         guestId : accusation.guestId,
@@ -30,5 +30,16 @@ export async function AccusationUpdate (id: number, accusation : Accusation) {
     console.log("Accusation Added: ", accusationUpdate);
   } catch (error) {
     console.log("Error Updatin Accusation: ", error);
+  }
+}
+
+export async function AccusationDelete(id:number, accusation : Accusation) {
+  try {
+    await prisma.accusation.delete({
+      where : {accusationId : id}
+    })
+    console.log("Deleted Accusation: ", id);
+  } catch (error) {
+    console.log("Error Delete Accusation: ", error);
   }
 }
