@@ -16,3 +16,19 @@ export async function AccusationAdd(accusation : Accusation) {
     console.log("Error Adding Accusation", error);
   }
 }
+
+export async function AccusationUpdate (id: number, accusation : Accusation) {
+  try {
+    const accusationUpdate = await prisma.accusation.update({
+      where : {id : id},
+      data : {
+        reportType : accusation.reportType,
+        guestId : accusation.guestId,
+        description : accusation.guestId
+      }
+    })
+    console.log("Accusation Added: ", accusationUpdate);
+  } catch (error) {
+    console.log("Error Updatin Accusation: ", error);
+  }
+}
