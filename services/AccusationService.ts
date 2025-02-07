@@ -44,7 +44,7 @@ export async function AccusationDelete(id:number) {
   }
 }
 
-export async function getAllAccusation() {
+export async function AccusationGetAll() {
   try {
     return await prisma.accusation.findMany();
   } catch(error) {

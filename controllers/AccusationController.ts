@@ -1,6 +1,6 @@
 import express from 'express';
 import { Accusation } from '../model/Accusation';
-import { AccusationAdd, AccusationDelete, AccusationUpdate } from '../services/AccusationService';
+import { AccusationAdd, AccusationDelete, AccusationGetAll, AccusationUpdate } from '../services/AccusationService';
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ exports.saveAccusation = async (req : any, res : any) => {
 };
 
 exports.updateAccusation = async (req : any, res : any) => {
-  const id = req.params.accusationId;
+  const id : number = req.params.accusationId;
   console.log("Accusation Id For Update: ", id);
   const accusation : Accusation = req.body;
 
@@ -40,4 +40,13 @@ exports.deleteAccusation = async (req : any, res : any) => {
   }
 };
 
+exports.getAllAccusation = async (req : any, res : any) => {
+  try {
+    const accusation = await AccusationGetAll();
+    console.log(res.json(accusation));
+  } catch (error) {
+    console.log("Error Getting Accusation", error);
+  }
+};
 
+export default router;
