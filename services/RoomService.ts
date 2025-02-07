@@ -7,7 +7,7 @@ export async function RoomAdd(room : Room) {
       data : {
         roomNumber : room.roomNumber,
         roomType : room.roomType,
-        selectedImage : room.selectedImage,
+        selectedImage : room.selectedImage ?? "",
         hallFloor : room.hallFloor,
         price : room.price,
         status : room.status
