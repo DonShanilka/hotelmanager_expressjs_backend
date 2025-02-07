@@ -33,7 +33,7 @@ export async function AccusationUpdate (id: number, accusation : Accusation) {
   }
 }
 
-export async function AccusationDelete(id:number, accusation : Accusation) {
+export async function AccusationDelete(id:number) {
   try {
     await prisma.accusation.delete({
       where : {accusationId : id}

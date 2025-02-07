@@ -1,6 +1,6 @@
 import express from 'express';
 import { Accusation } from '../model/Accusation';
-import { AccusationAdd, AccusationUpdate } from '../services/AccusationService';
+import { AccusationAdd, AccusationDelete, AccusationUpdate } from '../services/AccusationService';
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ exports.saveAccusation = async (req : any, res : any) => {
   } catch (error) {
     console.error("Erro Adding Accusation: ", error);
   }
-}
+};
 
 exports.updateAccusation = async (req : any, res : any) => {
   const id = req.params.accusationId;
@@ -27,4 +27,17 @@ exports.updateAccusation = async (req : any, res : any) => {
   } catch (error) {
     console.log("Error Update Accusation: ", error);
   }
-}
+};
+
+exports.deleteAccusation = async (req : any, res : any) => {
+  const id : number = req.params.accusationId;
+
+  try {
+    await AccusationDelete(id);
+    res.send("Accusation Deleted");
+  } catch (error) {
+    console.log("Error Delete Accusation", error);
+  }
+};
+
+
