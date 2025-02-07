@@ -1,7 +1,6 @@
 import { BookingStatus } from "./BookingStatus";
 import { Guest } from "./Guest";
-import { Payment } from "./Payment";
-import { Room } from "./Room";
+import { Payment } from "./Payment"
 import { Service } from "./Service";
 
 export class Booking {
@@ -14,6 +13,7 @@ export class Booking {
   totalNight !: number;
   bookingStatus !: BookingStatus;
   createdAt !: Date;
+  
   Guest !: Guest;
   Payments !: Payment[];
   Service !: Service[];

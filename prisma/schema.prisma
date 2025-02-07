@@ -119,3 +119,14 @@ model ServiceUsage {
   Service Service @relation(fields: [serviceID], references: [serviceID])
   Guest   Guest   @relation(fields: [guestId], references: [guestId])
 }
+
+model Employee {
+  employeeID   Int     @id @default(autoincrement())
+  fullName     String
+  email        String  @unique
+  phoneNumber  String?
+  role         String
+  salary       Decimal?
+  hireDate     DateTime?
+  createdAt    DateTime @default(now())
+}
