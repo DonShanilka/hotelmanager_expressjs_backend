@@ -11,6 +11,11 @@ const roomRouters = require('./routes/roomRouter');
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
 app.use(fileUpload());
+app.use(fileUpload());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use('/api', guestRouters);
 app.use('/api', accusationRouters);
