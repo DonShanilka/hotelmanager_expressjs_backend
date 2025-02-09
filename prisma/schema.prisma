@@ -32,7 +32,7 @@ model Accusation {
 model Room {
   roomNumber    String  @id
   roomType      String
-  selectedImage String
+  selectedImage Bytes
   hallFloor     Int
   price         Decimal
   status        String

@@ -1,32 +1,52 @@
-import { Request, Response } from "express";
-import fileUpload, { UploadedFile } from "express-fileupload";
-import { prisma } from "../db/Prisma_data_storage";
-import { Room } from "../model/Room";
-import { RoomAdd } from "../services/RoomService";
-import { extractImages } from "../extractImages/extractImages";
+import multer from 'multer';
+import { prisma } from '../db/Prisma_data_storage';
+import { Room } from '../model/Room';
+import { Request, Response } from 'express';
 
-export const saveRoom = async (req: Request, res: Response) => {
+// Set up multer for file uploads
+const storage = multer.memoryStorage(); // Store file in memory (Buffer)
+const upload = multer({ storage: storage }); // Use multer middleware
+
+// Function to save the room
+export async function saveRoom(req: Request, res: Response) {
   try {
-    const image : any = extractImages(req);
-    const selectedImage = image instanceof Buffer ? image.toString('base64') : image;
-    // Extract room data from request
-    const { roomNumber, roomType, hallFloor, price, status } = req.body;
-    const hallFloorNum = parseInt(hallFloor, 10);
-    const priceNum = parseFloat(price);
+    // Use multer middleware to handle file upload and parse form data
+    // 'selectedImage' is the name of the file input field in the HTML form
+    upload.single('selectedImage')(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ error: "File upload error" });
+      }
 
-    const roomData: Room = {
-      roomNumber,
-      roomType,
-      selectedImage: image, // Save the file path in DB
-      hallFloor: hallFloorNum,
-      price: priceNum,
-      status,
-    };
+      // Access form data
+      const { roomNumber, roomType, hallFloor, price, status } = req.body;
+      const selectedImage = req.file ? req.file.buffer : Buffer.alloc(0); // If file uploaded, get the buffer, else empty buffer
 
-    const newRoom = await RoomAdd(roomData);
-    res.status(200).json(newRoom);
+      // Validate form data
+      if (!roomNumber || !roomType || !hallFloor || !price || !status) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      // Prepare room data
+      const roomData: Room = {
+        roomNumber: roomNumber,  // Assuming roomNumber is a string and needs to be parsed
+        roomType,
+        selectedImage,
+        hallFloor: parseInt(hallFloor),   // Convert floor to number if needed
+        price: parseFloat(price),         // Convert price to float
+        status,
+      };
+
+      // Create a new room in the database
+      const newRoom = await prisma.room.create({
+        data: roomData,
+      });
+
+      console.log("Room Added Successfully:", newRoom);
+      return res.status(201).json(newRoom); // Return the created room as a response
+    });
+
   } catch (error) {
     console.error("Error Adding Room:", error);
-    res.status(500).json({ error: "Error Adding Room" });
+    return res.status(500).json({ error: "Failed to add room" });
   }
-};
+}

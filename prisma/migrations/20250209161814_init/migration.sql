@@ -27,7 +27,7 @@ CREATE TABLE `Accusation` (
 CREATE TABLE `Room` (
     `roomNumber` VARCHAR(191) NOT NULL,
     `roomType` VARCHAR(191) NOT NULL,
-    `selectedImage` VARCHAR(191) NOT NULL,
+    `selectedImage` LONGBLOB NOT NULL,
     `hallFloor` INTEGER NOT NULL,
     `price` DECIMAL(65, 30) NOT NULL,
     `status` VARCHAR(191) NOT NULL,

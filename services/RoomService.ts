@@ -1,4 +1,4 @@
-import {prisma} from '../db/Prisma_data_storage';
+import { prisma } from '../db/Prisma_data_storage';
 import { Room } from '../model/Room';
 
 export async function RoomAdd(room: Room) {
@@ -7,7 +7,7 @@ export async function RoomAdd(room: Room) {
       data: {
         roomNumber: room.roomNumber,
         roomType: room.roomType,
-        selectedImage: room.selectedImage, // Ensure it's a string
+        selectedImage: room.selectedImage || Buffer.alloc(0), // Directly store as Buffer
         hallFloor: room.hallFloor,
         price: room.price,
         status: room.status,
