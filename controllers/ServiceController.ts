@@ -1,5 +1,5 @@
 import express from 'express';
-import { ServiceAdd } from '../services/Service';
+import { getAll, ServiceAdd } from '../services/Service';
 
 const router = express.Router();
 
@@ -15,3 +15,14 @@ exports.saveService = async (req : any, res : any) => {
     res.status(400).send("Error Adding Service");
   }
 };
+
+exports.getAllService = async (req : any, res : any) => {
+  try {
+    const service = await getAll();
+    console.log(res.json(service));
+  } catch (error) {
+    console.log("error Getting Serviceses", error);
+  }
+};
+
+export default router;
