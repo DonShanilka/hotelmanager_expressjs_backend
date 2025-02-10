@@ -41,7 +41,7 @@ exports.delete = async (req : any, res : any) => {
   }
 };
 
-exports.getAll =  async (req : any, res : any) => {
+exports.getAll = async (req : any, res : any) => {
   try {
     const guest = await getAllGuest();
     console.log(res.json(guest));

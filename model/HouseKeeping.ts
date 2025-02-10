@@ -4,5 +4,5 @@ export class HouseKeeping {
   cleaningDate !: Date;
   status !: string;
   specialTasks !: string;
-  empId !: number;
+  empId !: string;
 }

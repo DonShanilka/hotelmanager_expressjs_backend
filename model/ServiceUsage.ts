@@ -5,11 +5,12 @@ import { Service } from "./Service";
 export class ServiceUsage {
   usageID !: number;
   bookingID !: number;
-  guestId !: number;
+  guestId !: string;
   serviceID !: number;
   quantity !: number;
   totalCost !: number;
   usageDate !: Date;
+  
   Booking !: Booking;
   Service !: Service;
   Guest !: Guest;

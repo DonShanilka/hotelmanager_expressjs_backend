@@ -48,7 +48,7 @@ model HouseKeeping {
   cleaningDate   DateTime
   status         String
   specialTasks   String
-  empId          Int
+  empId          String
 
   room Room @relation(fields: [roomNumber], references: [roomNumber])
 }
@@ -121,7 +121,7 @@ model ServiceUsage {
 }
 
 model Employee {
-  employeeID   Int     @id @default(autoincrement())
+  employeeID   String     @id 
   fullName     String
   email        String  @unique
   phoneNumber  String?
