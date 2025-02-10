@@ -2,11 +2,10 @@ import multer from 'multer';
 import { prisma } from '../db/Prisma_data_storage';
 import { Room } from '../model/Room';
 import { Request, Response } from 'express';
-import { RoomUpdate } from '../services/RoomService';
+import { RoomDelete, RoomUpdate } from '../services/RoomService';
 
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage: storage }); 
-
 
 exports.saveRoom = async (req: Request, res: Response) => {
   try {
@@ -44,7 +43,7 @@ exports.saveRoom = async (req: Request, res: Response) => {
     console.error("Error Adding Room:", error);
     return res.status(500).json({ error: "Failed to add room" });
   }
-}
+};
 
 exports.updateRoom = async (req : any, res : any) => {
   const id = req.params.id;
@@ -56,4 +55,15 @@ exports.updateRoom = async (req : any, res : any) => {
   } catch (error) {
     console.log("Error Updating Room: ", error);
   }
-}
+};
+
+exports.deletRoom = async (req : any, res : any) => {
+  const id  = req.params.id;
+
+  try {
+    await RoomDelete(id);
+    res.send("Room Deleted");
+  } catch (error) {
+    console.log("Error Deleteing Room", error);
+  }
+};
