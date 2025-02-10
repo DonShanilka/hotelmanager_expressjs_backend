@@ -1,5 +1,5 @@
 {
-  "name": "greenshadow_expressjs_backend",
+  "name": "hotelManage_expressjs_backend",
   "version": "1.0.0",
   "main": "Server.ts",
   "scripts": {
