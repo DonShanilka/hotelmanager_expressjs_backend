@@ -67,3 +67,13 @@ export async function RoomDelete(id : string) {
     console.log("Error", error);
   }
 }
+
+export async function getAllRoom(){
+  try {
+    const getAll = await prisma.room.findMany();
+    console.log(getAll);
+    return getAll;
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
