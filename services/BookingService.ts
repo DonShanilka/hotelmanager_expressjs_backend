@@ -77,7 +77,7 @@ export async function BookingDelete(id : number) {
   }
 }
 
-export async function getAllBooking() {
+export async function BookingetAll() {
   try {
     const allBooking = await prisma.booking.findMany();
     console.log("All Booking: ", allBooking);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { BookingAdd, BookingDelete, BookingUpdate } from '../services/BookingService';
+import { BookingAdd, BookingDelete, BookingetAll, BookingUpdate } from '../services/BookingService';
 import { Booking } from '../model/Booking';
 
 const router = express.Router();
@@ -41,13 +41,13 @@ exports.deleteBooking = async (req : any, res : any) => {
   }
 };
 
-// exports.getAll = async (req : any, res : any) => {
-//   try {
-//     const guest = await getAllGuest();
-//     console.log(res.json(guest));
-//   } catch (error) {
-//     console.log("error Getting Guest", error);
-//   }
-// };
+exports.getAllBooking = async (req : any, res : any) => {
+  try {
+    const booking = await BookingetAll();
+    console.log(res.json(booking));
+  } catch (error) {
+    console.log("error Getting Booking", error);
+  }
+};
 
 export default router;
