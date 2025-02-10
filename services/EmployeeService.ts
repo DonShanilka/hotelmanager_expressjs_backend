@@ -2,7 +2,7 @@ import { prisma } from "../db/Prisma_data_storage";
 import { Employee } from "../model/Employee";
 
 
-export async function BookingAdd(employee: Employee) {
+export async function EmployeeAdd(employee: Employee) {
   try {
     const newEmployee = await prisma.employee.create({
       data: {
@@ -45,7 +45,7 @@ export async function EmployeeUpdate(id: string, employee: Employee) {
         hireDate : employee.hireDate,
         createdAt : employee.createdAt
       }
-    })
+    });
     console.log("Success Fully Updated Employee: ", employeeUpdate);
   } catch (error) {
     console.log("Error", error);
@@ -57,11 +57,9 @@ export async function EmployeeDelete(id : string) {
     const existingEmployee = await prisma.employee.findUnique({
       where: {employeeID: id },
     });
-
     if (!existingEmployee) {
       throw new Error(`Employee with ID ${id} not found`);
     }
-
     await prisma.employee.delete({
       where: {employeeID : id}
     });
