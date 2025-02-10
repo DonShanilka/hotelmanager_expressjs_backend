@@ -57,25 +57,25 @@ export async function BookingUpdate(id: number, booking: Booking) {
   }
 }
 
-// export async function GuestDelete(id : string) {
-//   try {
+export async function BookingDelete(id : number) {
+  try {
 
-//     const existingGuest = await prisma.guest.findUnique({
-//       where: {guestId: id },
-//     });
+    const existingBooking = await prisma.booking.findUnique({
+      where: {bookingID: id },
+    });
 
-//     if (!existingGuest) {
-//       throw new Error(`Guest with ID ${id} not found`);
-//     }
+    if (!existingBooking) {
+      throw new Error(`Booking ID ${id} not found`);
+    }
 
-//     await prisma.guest.delete({
-//       where: {guestId : id}
-//     });
-//     console.log("Success Fully Deleted Guest: ");
-//   } catch (error) {
-//     console.log("Error", error);
-//   }
-// }
+    await prisma.booking.delete({
+      where: {bookingID : id}
+    });
+    console.log("Success Fully Deleted Booking: ");
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
 
 // export async function getAllGuest() {
 //   try {
