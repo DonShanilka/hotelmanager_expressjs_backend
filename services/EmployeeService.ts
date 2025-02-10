@@ -69,4 +69,14 @@ export async function EmployeeDelete(id : string) {
   } catch (error) {
     console.log("Error", error);
   }
+};
+
+export async function getAllEmployee() {
+  try {
+    const allEmployee = await prisma.employee.findMany();
+    console.log("All Employee: ", allEmployee);
+    return allEmployee;
+  } catch (error) {
+    console.log("Error", error);
+  }
 }
