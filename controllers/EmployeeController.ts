@@ -1,5 +1,5 @@
 import express from 'express';
-import { EmployeeAdd, EmployeeDelete, EmployeeUpdate } from '../services/EmployeeService';
+import { EmployeeAdd, EmployeeDelete, EmployeeUpdate, getAllEmployee } from '../services/EmployeeService';
 import { Employee } from '../model/Employee';
 
 
@@ -41,3 +41,15 @@ exports.deleteEmployee = async (req : any, res : any) => {
     console.log("Error Delete Employee", error);
   }
 };
+
+
+exports.getAllEmployee = async (req : any, res : any) => {
+  try {
+    const guest = await getAllEmployee();
+    console.log(res.json(guest));
+  } catch (error) {
+    console.log("error Getting Employee", error);
+  }
+};
+
+export default router;
