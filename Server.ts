@@ -8,6 +8,7 @@ const guestRouters = require('./routes/guestRouter');
 const accusationRouters = require('./routes/AccusationRouter');
 const roomRouters = require('./routes/roomRouter');
 const bookingRouter = require('./routes/bookingRouter');
+const serviceRouter = require('./routes/serviceRouter');
 
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
@@ -21,6 +22,7 @@ app.use('/api', guestRouters);
 app.use('/api', accusationRouters);
 app.use('/api', roomRouters);
 app.use('/api', bookingRouter);
+app.use('/api', serviceRouter);
 
 // app.use("/downloads", express.static("downloads"));
 
