@@ -4,7 +4,7 @@ import { Booking } from "../model/Booking";
 
 export async function BookingAdd(booking: Booking) {
   try {
-    const newBooking = await prisma.guest.create({
+    const newBooking = await prisma.booking.create({
       data: {
         bookingID : booking.bookingID,
         guestID : booking.guestID,
@@ -25,35 +25,37 @@ export async function BookingAdd(booking: Booking) {
   }
 }
 
-// export async function GuestUpdate(id: string, guest: Guest) {
-//   try {
+export async function BookingUpdate(id: number, booking: Booking) {
+  try {
 
-//     const existingGuest = await prisma.guest.findUnique({
-//       where: {guestId: id },
-//     });
+    const existingBooking = await prisma.booking.findUnique({
+      where: {bookingID: id },
+    });
 
-//     if (!existingGuest) {
-//       throw new Error(`Guest with ID ${id} not found`);
-//     }
+    if (!existingBooking) {
+      throw new Error(`Booking ID ${id} not found`);
+    }
 
-//     const guestUpdate = await prisma.guest.update({
-//       where: {guestId : id},
-//       data : {
-//         guestName: guest.guestName,
-//         contactNumber: guest.contactNumber,
-//         email: guest.email,
-//         roomNumber: guest.roomNumber,
-//         checkInDate: guest.checkInDate,
-//         checkOutDate: guest.checkOutDate,
-//         nation: guest.nation,
-//       }
-//     })
-//     // alert("Success Fully Updated Guest: ");
-//     console.log("Success Fully Updated Guest: ", guestUpdate);
-//   } catch (error) {
-//     console.log("Error", error);
-//   }
-// }
+    const bookingUpdate = await prisma.booking.update({
+      where: {bookingID : id},
+      data : {
+        bookingID : booking.bookingID,
+        guestID : booking.guestID,
+        roomNumber : booking.roomNumber,
+        checkInDate : booking.checkInDate,
+        checkOutDate : booking.checkOutDate,
+        totalAmount : booking.totalAmount,
+        totalNight : booking.totalNight,
+        bookingStatus : booking.bookingStatus,
+        createdAt : booking.createdAt,
+      }
+    })
+    // alert("Success Fully Updated Guest: ");
+    console.log("Success Fully Updated Booking: ", bookingUpdate);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
 
 // export async function GuestDelete(id : string) {
 //   try {
