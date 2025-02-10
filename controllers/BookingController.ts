@@ -1,5 +1,5 @@
 import express from 'express';
-import { BookingAdd, BookingUpdate } from '../services/BookingService';
+import { BookingAdd, BookingDelete, BookingUpdate } from '../services/BookingService';
 import { Booking } from '../model/Booking';
 
 const router = express.Router();
@@ -30,16 +30,16 @@ exports.updateBooking = async (req : any, res : any) => {
   }
 };
 
-// exports.delete = async (req : any, res : any) => {
-//   const id = req.params.id;
+exports.deleteBooking = async (req : any, res : any) => {
+  const id = req.params.id;
 
-//   try {
-//     await GuestDelete(id);
-//     res.send("Guest Deleted");
-//   } catch (error) {
-//     console.log("Error Delete Guest", error);
-//   }
-// };
+  try {
+    await BookingDelete(id);
+    res.send("Booking Deleted");
+  } catch (error) {
+    console.log("Error Delete Booking", error);
+  }
+};
 
 // exports.getAll = async (req : any, res : any) => {
 //   try {
