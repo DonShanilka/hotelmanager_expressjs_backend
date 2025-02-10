@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAll, ServiceAdd, ServiceDelete } from '../services/Service';
+import { getAll, ServiceAdd, ServiceDelete, ServiceUpdate } from '../services/Service';
+import { Service } from '../model/Service';
 
 const router = express.Router();
 
@@ -13,6 +14,19 @@ exports.saveService = async (req : any, res : any) => {
   } catch (error) {
     console.error("Error Adding Service: ", error);
     res.status(400).send("Error Adding Service");
+  }
+};
+
+exports.updateService = async (req : any, res : any) => {
+  const id = Number(req.params.id);
+  console.log("Service Update: ", id);
+  const service : Service = req.body;
+
+  try {
+    await ServiceUpdate(id, service);
+    res.send("Service Update")
+  } catch (error) {
+    console.log("Error Update Service: ", error);
   }
 };
 
