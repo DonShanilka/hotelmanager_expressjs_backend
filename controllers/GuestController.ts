@@ -19,7 +19,7 @@ exports.save = async (req : any, res : any) => {
 
 exports.update = async (req : any, res : any) => {
   const id = req.params.id;
-  console.log("Customer Id for Update: ", id);
+  console.log("Guest Id for Update: ", id);
   const guest : Guest = req.body;
 
   try {

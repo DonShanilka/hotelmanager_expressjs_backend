@@ -1,5 +1,6 @@
 import express from 'express';
-import { BookingAdd } from '../services/BookingService';
+import { BookingAdd, BookingUpdate } from '../services/BookingService';
+import { Booking } from '../model/Booking';
 
 const router = express.Router();
 
@@ -16,18 +17,18 @@ exports.saveBooking = async (req : any, res : any) => {
   }
 };
 
-// exports.update = async (req : any, res : any) => {
-//   const id = req.params.id;
-//   console.log("Customer Id for Update: ", id);
-//   const guest : Guest = req.body;
+exports.updateBooking = async (req : any, res : any) => {
+  const id = req.params.id;
+  console.log("Booking Update: ", id);
+  const booking : Booking = req.body;
 
-//   try {
-//     await GuestUpdate(id, guest);
-//     res.send("Guest Update")
-//   } catch (error) {
-//     console.log("Error Update Guest: ", error);
-//   }
-// };
+  try {
+    await BookingUpdate(id, booking);
+    res.send("Booking Update")
+  } catch (error) {
+    console.log("Error Update Booking: ", error);
+  }
+};
 
 // exports.delete = async (req : any, res : any) => {
 //   const id = req.params.id;
