@@ -55,7 +55,6 @@ export async function GuestUpdate(id: string, guest: Guest) {
 
 export async function GuestDelete(id : string) {
   try {
-
     const existingGuest = await prisma.guest.findUnique({
       where: {guestId: id },
     });
