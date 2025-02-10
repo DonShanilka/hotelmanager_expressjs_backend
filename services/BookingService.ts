@@ -77,12 +77,12 @@ export async function BookingDelete(id : number) {
   }
 }
 
-// export async function getAllGuest() {
-//   try {
-//     const allGuest = await prisma.guest.findMany();
-//     console.log("All Guest: ", allGuest);
-//     return allGuest;
-//   } catch (error) {
-//     console.log("Error", error);
-//   }
-// }
+export async function getAllBooking() {
+  try {
+    const allBooking = await prisma.booking.findMany();
+    console.log("All Booking: ", allBooking);
+    return allBooking;
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
