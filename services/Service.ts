@@ -21,31 +21,30 @@ export async function ServiceAdd(service : Service) {
   }
 }
 
-// export async function RoomUpdate(id : string, room : Room) {
-//   try {
-//     const existingRoom = await prisma.room.findUnique({
-//       where : {roomNumber : id},
-//     });
+export async function ServiceUpdate(id : number, service : Service) {
+  try {
+    const existingService = await prisma.service.findUnique({
+      where : {serviceID : id},
+    });
 
-//     if (!existingRoom) {
-//       throw new Error(`${id} Room Number not found`);
-//     }
+    if (!existingService) {
+      throw new Error(`${id} Service ID not found`);
+    }
 
-//     const roomUpdate = await prisma.room.update({
-//       where: {roomNumber : id},
-//       data : {
-//         roomType : room.roomType,
-//         selectedImage : room.selectedImage,
-//         hallFloor : room.hallFloor,
-//         price : room.price,
-//         status : room.status
-//       }
-//     });
-//     console.log("Success Full Update Room", roomUpdate);
-//   } catch (error) {
-//     console.log("Error", error);
-//   }
-// }
+    const serviceUpdate = await prisma.service.update({
+      where: {serviceID : id},
+      data : {
+        serviceName : service.serviceName,
+        servicePrice : service.servicePrice,
+        description : service.description,
+        createdAt : service.createdAt
+      }
+    });
+    console.log("Success Full Update Service", serviceUpdate);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
 
 // export async function RoomDelete(id : string) {
 //   try {
