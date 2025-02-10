@@ -46,25 +46,25 @@ export async function ServiceUpdate(id : number, service : Service) {
   }
 }
 
-// export async function RoomDelete(id : string) {
-//   try {
-//     const existingRoom = await prisma.room.findUnique({
-//       where : {roomNumber : id}
-//     });
+export async function ServiceDelete(id : number) {
+  try {
+    const existingService = await prisma.service.findUnique({
+      where : {serviceID : id}
+    });
 
-//     if (!existingRoom) {
-//       throw new Error(`${id} Room Number not found`);
-//     }
+    if (!existingService) {
+      throw new Error(`${id} Service ID not found`);
+    }
 
-//     await prisma.room.delete({
-//       where : {roomNumber : id}
-//     });
+    await prisma.service.delete({
+      where : {serviceID : id}
+    });
     
-//     console.log("Success Fully Deleted Room", id);
-//   } catch (error) {
-//     console.log("Error", error);
-//   }
-// }
+    console.log("Success Fully Deleted Service", id);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
 
 // export async function getAll(){
 //   try {
