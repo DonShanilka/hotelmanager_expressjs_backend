@@ -50,4 +50,23 @@ export async function EmployeeUpdate(id: string, employee: Employee) {
   } catch (error) {
     console.log("Error", error);
   }
+};
+
+export async function EmployeeDelete(id : string) {
+  try {
+    const existingEmployee = await prisma.employee.findUnique({
+      where: {employeeID: id },
+    });
+
+    if (!existingEmployee) {
+      throw new Error(`Employee with ID ${id} not found`);
+    }
+
+    await prisma.employee.delete({
+      where: {employeeID : id}
+    });
+    console.log("Success Fully Deleted Employee: ");
+  } catch (error) {
+    console.log("Error", error);
+  }
 }
