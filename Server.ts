@@ -13,7 +13,6 @@ const serviceRouter = require('./routes/serviceRouter');
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
 app.use(fileUpload());
-app.use(fileUpload());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
