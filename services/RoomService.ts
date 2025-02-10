@@ -21,3 +21,29 @@ export async function RoomAdd(room: Room) {
     throw new Error("Failed to add room"); // Throw for higher-level handling
   }
 }
+
+export async function RoomUpdate(id : string, room : Room) {
+  try {
+    const existingRoom = await prisma.room.findUnique({
+      where : {roomNumber : id},
+    });
+
+    if (!existingRoom) {
+      throw new Error(`${id} Room Number not found`);
+    }
+
+    const roomUpdate = await prisma.room.update({
+      where: {roomNumber : id},
+      data : {
+        roomType : room.roomType,
+        selectedImage : room.selectedImage,
+        hallFloor : room.hallFloor,
+        price : room.price,
+        status : room.status
+      }
+    });
+    console.log("Success Full Update Room", roomUpdate);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
