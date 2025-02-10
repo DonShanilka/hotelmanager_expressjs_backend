@@ -77,12 +77,12 @@ model Booking {
   bookingID     Int           @id @default(autoincrement())
   guestID       String
   roomNumber    String
-  checkInDate   DateTime
-  checkOutDate  DateTime
+  checkInDate   String
+  checkOutDate  String
   totalAmount   Decimal
   totalNight    Int
   bookingStatus BookingStatus @default(Confirmed)
-  createdAt     DateTime      @default(now())
+  createdAt     String
 
   Guest         Guest          @relation(fields: [guestID], references: [guestId])
   Room          Room           @relation(fields: [roomNumber], references: [roomNumber])

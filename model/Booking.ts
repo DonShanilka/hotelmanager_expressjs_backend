@@ -7,12 +7,12 @@ export class Booking {
   bookingID !: number;
   guestID !: string;
   roomNumber !: string;
-  checkInDate !: Date;
-  checkOutDate !: Date;
+  checkInDate !: string;
+  checkOutDate !: string;
   totalAmount !: number;
   totalNight !: number;
   bookingStatus !: BookingStatus;
-  createdAt !: Date;
+  createdAt !: string;
   
   Guest !: Guest;
   Payments !: Payment[];
