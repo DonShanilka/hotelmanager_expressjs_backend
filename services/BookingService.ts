@@ -6,7 +6,6 @@ export async function BookingAdd(booking: Booking) {
   try {
     const newBooking = await prisma.booking.create({
       data: {
-        bookingID : booking.bookingID,
         guestID : booking.guestID,
         roomNumber : booking.roomNumber,
         checkInDate : booking.checkInDate,
@@ -39,7 +38,6 @@ export async function BookingUpdate(id: number, booking: Booking) {
     const bookingUpdate = await prisma.booking.update({
       where: {bookingID : id},
       data : {
-        bookingID : booking.bookingID,
         guestID : booking.guestID,
         roomNumber : booking.roomNumber,
         checkInDate : booking.checkInDate,
