@@ -2,7 +2,7 @@ import multer from 'multer';
 import { prisma } from '../db/Prisma_data_storage';
 import { Room } from '../model/Room';
 import { Request, Response } from 'express';
-import { RoomDelete, RoomUpdate } from '../services/RoomService';
+import { getAll, RoomDelete, RoomUpdate } from '../services/RoomService';
 
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage: storage }); 
@@ -67,3 +67,12 @@ exports.deletRoom = async (req : any, res : any) => {
     console.log("Error Deleteing Room", error);
   }
 };
+
+exports.getAllRooms = async (req : any, res : any) => {
+  try {
+    const room = await getAll();
+    console.log(res.json(room));
+  } catch (error) {
+    console.log("Rooms Getting Error: ", error);
+  }
+}

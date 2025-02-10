@@ -68,7 +68,7 @@ export async function RoomDelete(id : string) {
   }
 }
 
-export async function getAllRoom(){
+export async function getAll(){
   try {
     const getAll = await prisma.room.findMany();
     console.log(getAll);
