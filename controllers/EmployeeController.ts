@@ -1,5 +1,5 @@
 import express from 'express';
-import { EmployeeAdd, EmployeeUpdate } from '../services/EmployeeService';
+import { EmployeeAdd, EmployeeDelete, EmployeeUpdate } from '../services/EmployeeService';
 import { Employee } from '../model/Employee';
 
 
@@ -28,5 +28,16 @@ exports.updateEmployee = async (req : any, res : any) => {
     res.send("Employee Update")
   } catch (error) {
     console.log("Error Update Employee: ", error);
+  }
+};
+
+exports.deleteEmployee = async (req : any, res : any) => {
+  const id = req.params.id;
+
+  try {
+    await EmployeeDelete(id);
+    res.send("Employee Deleted");
+  } catch (error) {
+    console.log("Error Delete Employee", error);
   }
 };
