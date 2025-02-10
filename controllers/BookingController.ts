@@ -18,7 +18,7 @@ exports.saveBooking = async (req : any, res : any) => {
 };
 
 exports.updateBooking = async (req : any, res : any) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   console.log("Booking Update: ", id);
   const booking : Booking = req.body;
 
@@ -31,7 +31,7 @@ exports.updateBooking = async (req : any, res : any) => {
 };
 
 exports.deleteBooking = async (req : any, res : any) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   try {
     await BookingDelete(id);
