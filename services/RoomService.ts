@@ -47,3 +47,23 @@ export async function RoomUpdate(id : string, room : Room) {
     console.log("Error", error);
   }
 }
+
+export async function RoomDelete(id : string) {
+  try {
+    const existingRoom = await prisma.room.findUnique({
+      where : {roomNumber : id}
+    });
+
+    if (!existingRoom) {
+      throw new Error(`${id} Room Number not found`);
+    }
+
+    await prisma.room.delete({
+      where : {roomNumber : id}
+    });
+    
+    console.log("Success Fully Deleted Room", id);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
