@@ -2,21 +2,21 @@ import { prisma } from "../db/Prisma_data_storage";
 import { Payment } from "../model/Payment";
 
 
-export async function PaymentAdd(Payment : Payment) {
+export async function PaymentAdd(payment : Payment) {
   try {
     const newService = await prisma.payment.create({
       data: {
-        roomNumber : Payment.roomNumber,
-        guestId : Payment.guestId,
-        guestName : Payment.guestName,
-        checkInDate : Payment.checkInDate,
-        checkOutDate : Payment.checkOutDate,
-        totalNight : Payment.totalNight,
-        roomPerNight : Payment.roomPerNight,
-        additionalCharges : Payment.additionalCharges,
-        paymentMethod : Payment.paymentMethod,
-        cashReceive : Payment.cashReceive,
-        createdAt : Payment.createdAt
+        roomNumber : payment.roomNumber,
+        guestId : payment.guestId,
+        guestName : payment.guestName,
+        checkInDate : payment.checkInDate,
+        checkOutDate : payment.checkOutDate,
+        totalNight : payment.totalNight,
+        roomPerNight : payment.roomPerNight,
+        additionalCharges : payment.additionalCharges,
+        paymentMethod : payment.paymentMethod,
+        cashReceive : payment.cashReceive,
+        createdAt : payment.createdAt
       },
     });
     console.log("Payment Added Successfully:", newService);
@@ -24,5 +24,37 @@ export async function PaymentAdd(Payment : Payment) {
   } catch (error) {
     console.error("Error Adding Payment:", error);
     throw new Error("Failed to add Payment"); 
+  }
+};
+
+export async function PaymentUpdate(id : number, payment : Payment) {
+  try {
+    const existingPayment = await prisma.payment.findUnique({
+      where : {paymentId : id},
+    });
+
+    if (!existingPayment) {
+      throw new Error(`${id} Payment Number not found`);
+    }
+
+    const roomUpdate = await prisma.payment.update({
+      where: {paymentId : id},
+      data : {
+        roomNumber : payment.roomNumber,
+        guestId : payment.guestId,
+        guestName : payment.guestName,
+        checkInDate : payment.checkInDate,
+        checkOutDate : payment.checkOutDate,
+        totalNight : payment.totalNight,
+        roomPerNight : payment.roomPerNight,
+        additionalCharges : payment.additionalCharges,
+        paymentMethod : payment.paymentMethod,
+        cashReceive : payment.cashReceive,
+        createdAt : payment.createdAt
+      }
+    });
+    console.log("Success Full Payment Room", roomUpdate);
+  } catch (error) {
+    console.log("Error", error);
   }
 }
