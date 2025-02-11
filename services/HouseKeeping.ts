@@ -20,6 +20,7 @@ export async function HouseKeepingAdd(houseKeeping: HouseKeeping) {
   }
 };
 
+
 export async function HouseKeepingUpdate(id: number, houseKeeping : HouseKeeping) {
   try {
 
@@ -43,6 +44,25 @@ export async function HouseKeepingUpdate(id: number, houseKeeping : HouseKeeping
     })
     // alert("Success Fully Updated Guest: ");
     console.log("Success Fully Updated HouseKeeping: ", houseKeepingUpdate);
+  } catch (error) {
+    console.log("Error", error);
+  }
+};
+
+export async function HouseKeepingDelete(id : number) {
+  try {
+    const existingHouseKeeping = await prisma.houseKeeping.findUnique({
+      where: {houseKeepingId: id },
+    });
+
+    if (!existingHouseKeeping) {
+      throw new Error(`HouseKeeping with ID ${id} not found`);
+    }
+
+    await prisma.houseKeeping.delete({
+      where: {houseKeepingId : id}
+    });
+    console.log("Success Fully Deleted HouseKeeping: ");
   } catch (error) {
     console.log("Error", error);
   }
