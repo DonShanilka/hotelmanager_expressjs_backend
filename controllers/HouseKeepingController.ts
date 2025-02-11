@@ -1,5 +1,5 @@
 import express from 'express';
-import { HouseKeepingAdd, HouseKeepingUpdate } from '../services/HouseKeeping';
+import { HouseKeepingAdd, HouseKeepingDelete, HouseKeepingUpdate } from '../services/HouseKeeping';
 import { HouseKeeping } from '../model/HouseKeeping';
 
 const router = express.Router();
@@ -27,5 +27,16 @@ exports.updateHouseKeeping = async (req : any, res : any) => {
     res.send("Update HouseKeeping")
   } catch (error) {
     console.log("Error Update HouseKeeping: ", error);
+  }
+};
+
+exports.deleteHouseKeeping = async (req : any, res : any) => {
+  const id = req.params.id;
+
+  try {
+    await HouseKeepingDelete(id);
+    res.send("HouseKeeping Deleted");
+  } catch (error) {
+    console.log("Error Delete HouseKeeping", error);
   }
 };
