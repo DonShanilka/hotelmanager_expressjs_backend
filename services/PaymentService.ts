@@ -79,7 +79,7 @@ export async function PaymentDelete(id : number) {
   }
 }
 
-export async function getAll(){
+export async function getAllPayment(){
   try {
     const getAll = await prisma.payment.findMany();
     console.log(getAll);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { PaymentAdd, PaymentDelete, PaymentUpdate } from '../services/PaymentService';
+import { getAllPayment, PaymentAdd, PaymentDelete, PaymentUpdate } from '../services/PaymentService';
 import { Payment } from '../model/Payment';
 
 const router = express.Router();
@@ -40,3 +40,14 @@ exports.deletePayment = async (req : any, res : any) => {
     console.log("Error Delete Payment", error);
   }
 };
+
+exports.getAllPayment = async (req : any, res : any) => {
+  try {
+    const payment = await getAllPayment();
+    console.log(res.json(payment));
+  } catch (error) {
+    console.log("error Getting Payment", error);
+  }
+};
+
+export default router;
