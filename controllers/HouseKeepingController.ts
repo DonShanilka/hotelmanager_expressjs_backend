@@ -19,12 +19,12 @@ exports.saveHouseKeeping = async (req : any, res : any) => {
 
 exports.updateHouseKeeping = async (req : any, res : any) => {
   const id = req.params.id;
-  console.log("Guest Id for Update: ", id);
+  console.log("HouseKeeping Id for Update: ", id);
   const houseKeeping : HouseKeeping = req.body;
 
   try {
     await HouseKeepingUpdate(id, houseKeeping);
-    res.send("Guest HouseKeeping")
+    res.send("Update HouseKeeping")
   } catch (error) {
     console.log("Error Update HouseKeeping: ", error);
   }
