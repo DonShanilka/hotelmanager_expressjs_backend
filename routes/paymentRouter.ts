@@ -1,11 +1,11 @@
 import express from 'express';
 
 const router = express.Router();
-const roomController = require('../controllers');
+const paymentController = require('../controllers/PaymentController');
 
-router.post('/saveRoom', roomController.saveRoom); 
-router.put('/updateRoom/:id', roomController.updateRoom);
-router.delete('/deleteRoom/:id', roomController.deletRoom);
-router.get('/getAllRoom', roomController.getAllRooms);
+router.post('/savePayment', paymentController.savePayment); 
+router.put('/updatePayment/:id', paymentController.updatePayment);
+router.delete('/deletePayment/:id', paymentController.deletePayment);
+router.get('/getAllPayment', paymentController.getAllPayment);
 
 module.exports = router;
