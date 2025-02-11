@@ -10,6 +10,7 @@ const roomRouters = require('./routes/roomRouter');
 const bookingRouter = require('./routes/bookingRouter');
 const serviceRouter = require('./routes/serviceRouter');
 const employeeRouter = require('./routes/employeeRouter');
+const houseKeepingRouter = require('./routes/houseKeepingRouter');
 
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
@@ -24,6 +25,7 @@ app.use('/api', roomRouters);
 app.use('/api', bookingRouter);
 app.use('/api', serviceRouter);
 app.use('/api', employeeRouter);
+app.use('/api', houseKeepingRouter);
 
 // app.use("/downloads", express.static("downloads"));
 
