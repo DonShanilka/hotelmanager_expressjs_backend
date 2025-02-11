@@ -66,4 +66,14 @@ export async function HouseKeepingDelete(id : number) {
   } catch (error) {
     console.log("Error", error);
   }
+};
+
+export async function getAllHouseKeeping() {
+  try {
+    const allHouseKeeping = await prisma.houseKeeping.findMany();
+    console.log("All HouseKeeping: ", allHouseKeeping);
+    return allHouseKeeping;
+  } catch (error) {
+    console.log("Error", error);
+  }
 }
