@@ -58,3 +58,23 @@ export async function PaymentUpdate(id : number, payment : Payment) {
     console.log("Error", error);
   }
 }
+
+export async function PaymentDelete(id : number) {
+  try {
+    const existingPayment = await prisma.payment.findUnique({
+      where : {paymentId : id}
+    });
+
+    if (!existingPayment) {
+      throw new Error(`${id} Payment Number not found`);
+    }
+
+    await prisma.payment.delete({
+      where : {paymentId : id}
+    });
+    
+    console.log("Success Fully Deleted Payment", id);
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
