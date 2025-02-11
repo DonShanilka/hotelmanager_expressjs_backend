@@ -1,5 +1,5 @@
 import express from 'express';
-import { HouseKeepingAdd, HouseKeepingDelete, HouseKeepingUpdate } from '../services/HouseKeeping';
+import { getAllHouseKeeping, HouseKeepingAdd, HouseKeepingDelete, HouseKeepingUpdate } from '../services/HouseKeeping';
 import { HouseKeeping } from '../model/HouseKeeping';
 
 const router = express.Router();
@@ -40,3 +40,14 @@ exports.deleteHouseKeeping = async (req : any, res : any) => {
     console.log("Error Delete HouseKeeping", error);
   }
 };
+
+exports.getAllHouseKeeping = async (req : any, res : any) => {
+  try {
+    const houseKeeping = await getAllHouseKeeping();
+    console.log(res.json(houseKeeping));
+  } catch (error) {
+    console.log("error Getting HouseKeeping", error);
+  }
+};
+
+export default router;
