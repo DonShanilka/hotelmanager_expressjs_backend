@@ -11,4 +11,5 @@ export class Payment {
   paymentMethod !: string;
   cashReceive !: number;
   createdAt !: Date;
+  bookingBookingID !: number;
 }

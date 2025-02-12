@@ -16,7 +16,8 @@ export async function PaymentAdd(payment : Payment) {
         additionalCharges : payment.additionalCharges,
         paymentMethod : payment.paymentMethod,
         cashReceive : payment.cashReceive,
-        createdAt : payment.createdAt
+        createdAt : payment.createdAt,
+        bookingBookingID : payment.bookingBookingID
       },
     });
     console.log("Payment Added Successfully:", newService);
@@ -50,7 +51,8 @@ export async function PaymentUpdate(id : number, payment : Payment) {
         additionalCharges : payment.additionalCharges,
         paymentMethod : payment.paymentMethod,
         cashReceive : payment.cashReceive,
-        createdAt : payment.createdAt
+        createdAt : payment.createdAt,
+        bookingBookingID : payment.bookingBookingID
       }
     });
     console.log("Success Full Payment Room", roomUpdate);
