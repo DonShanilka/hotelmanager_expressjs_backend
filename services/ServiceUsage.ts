@@ -69,3 +69,13 @@ export async function UsageDelete(id : number) {
     console.log("Error", error);
   }
 }
+
+export async function getAll(){
+  try {
+    const getAll = await prisma.serviceUsage.findMany();
+    console.log(getAll);
+    return getAll;
+  } catch (error) {
+    console.log("Error", error);
+  }
+}
