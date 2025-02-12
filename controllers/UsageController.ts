@@ -1,5 +1,5 @@
 import express from 'express';
-import { UsageAdd, UsageDelete, UsageUpdate } from '../services/ServiceUsage';
+import { getAllUsage, UsageAdd, UsageDelete, UsageUpdate } from '../services/ServiceUsage';
 import { ServiceUsage } from '../model/ServiceUsage';
 
 const router = express.Router();
@@ -40,3 +40,14 @@ exports.deleteUsage = async (req : any, res : any) => {
     console.log("Error Delete Usage", error);
   }
 };
+
+exports.getAllUsage = async (req : any, res : any) => {
+  try {
+    const usage = await getAllUsage();
+    console.log(res.json(usage));
+  } catch (error) {
+    console.log("error Getting Usage", error);
+  }
+};
+
+export default router;

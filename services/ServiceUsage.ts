@@ -70,7 +70,7 @@ export async function UsageDelete(id : number) {
   }
 }
 
-export async function getAll(){
+export async function getAllUsage(){
   try {
     const getAll = await prisma.serviceUsage.findMany();
     console.log(getAll);
