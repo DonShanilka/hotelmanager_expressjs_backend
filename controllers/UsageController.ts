@@ -1,5 +1,6 @@
 import express from 'express';
-import { UsageAdd } from '../services/ServiceUsage';
+import { UsageAdd, UsageUpdate } from '../services/ServiceUsage';
+import { ServiceUsage } from '../model/ServiceUsage';
 
 const router = express.Router();
 
@@ -13,5 +14,18 @@ exports.saveUsage = async (req : any, res : any) => {
   } catch (error) {
     console.error("Error Adding Usage: ", error);
     res.status(400).send("Error Adding Usage");
+  }
+};
+
+exports.updateUsage = async (req : any, res : any) => {
+  const id = Number(req.params.id);
+  console.log("Usage Update: ", id);
+  const service : ServiceUsage = req.body;
+
+  try {
+    await UsageUpdate(id, service);
+    res.send("Usage Update")
+  } catch (error) {
+    console.log("Error Update Usage: ", error);
   }
 };
