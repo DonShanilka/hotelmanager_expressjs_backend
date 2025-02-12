@@ -18,7 +18,7 @@ exports.savePayment = async (req : any, res : any) => {
 };
 
 exports.updatePayment = async (req : any, res : any) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   console.log("Payment Id for Update: ", id);
   const payment : Payment = req.body;
 
@@ -31,7 +31,7 @@ exports.updatePayment = async (req : any, res : any) => {
 };
 
 exports.deletePayment = async (req : any, res : any) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   try {
     await PaymentDelete(id);
