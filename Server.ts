@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-const fileUpload = require('express-fileupload');
+import fileUpload from "express-fileupload";
 
 const guestRouters = require('./routes/guestRouter');
 const accusationRouters = require('./routes/AccusationRouter');

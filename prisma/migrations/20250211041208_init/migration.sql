@@ -42,7 +42,7 @@ CREATE TABLE `HouseKeeping` (
     `cleaningDate` DATETIME(3) NOT NULL,
     `status` VARCHAR(191) NOT NULL,
     `specialTasks` VARCHAR(191) NOT NULL,
-    `empId` INTEGER NOT NULL,
+    `empId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`houseKeepingId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -71,12 +71,12 @@ CREATE TABLE `Booking` (
     `bookingID` INTEGER NOT NULL AUTO_INCREMENT,
     `guestID` VARCHAR(191) NOT NULL,
     `roomNumber` VARCHAR(191) NOT NULL,
-    `checkInDate` DATETIME(3) NOT NULL,
-    `checkOutDate` DATETIME(3) NOT NULL,
+    `checkInDate` VARCHAR(191) NOT NULL,
+    `checkOutDate` VARCHAR(191) NOT NULL,
     `totalAmount` DECIMAL(65, 30) NOT NULL,
     `totalNight` INTEGER NOT NULL,
     `bookingStatus` ENUM('Confirmed', 'Cancelled', 'CheckedOut') NOT NULL DEFAULT 'Confirmed',
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`bookingID`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -107,7 +107,7 @@ CREATE TABLE `ServiceUsage` (
 
 -- CreateTable
 CREATE TABLE `Employee` (
-    `employeeID` INTEGER NOT NULL AUTO_INCREMENT,
+    `employeeID` VARCHAR(191) NOT NULL,
     `fullName` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `phoneNumber` VARCHAR(191) NULL,

@@ -2,13 +2,14 @@ import { prisma } from '../db/Prisma_data_storage';
 import { Room } from '../model/Room';
 
 export async function RoomAdd(room: Room) {
+  const half = Number(room.hallFloor);
   try {
     const newRoom = await prisma.room.create({
       data: {
         roomNumber: room.roomNumber,
         roomType: room.roomType,
-        selectedImage: room.selectedImage || Buffer.alloc(0), // Directly store as Buffer
-        hallFloor: room.hallFloor,
+        selectedImage: room.selectedImage,
+        hallFloor: half,
         price: room.price,
         status: room.status,
       },
