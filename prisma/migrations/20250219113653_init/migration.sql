@@ -113,7 +113,7 @@ CREATE TABLE `Employee` (
     `phoneNumber` VARCHAR(191) NULL,
     `role` VARCHAR(191) NOT NULL,
     `salary` DECIMAL(65, 30) NULL,
-    `hireDate` DATETIME(3) NULL,
+    `hireDate` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `Employee_email_key`(`email`),

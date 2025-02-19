@@ -127,6 +127,6 @@ model Employee {
   phoneNumber  String?
   role         String
   salary       Decimal?
-  hireDate     DateTime?
+  hireDate     String?
   createdAt    DateTime @default(now())
 }
