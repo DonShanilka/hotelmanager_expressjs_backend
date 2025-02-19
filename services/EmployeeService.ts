@@ -1,8 +1,8 @@
 import { prisma } from "../db/Prisma_data_storage";
 import { Employee } from "../model/Employee";
 
-
 export async function EmployeeAdd(employee: Employee) {
+
   try {
     const newEmployee = await prisma.employee.create({
       data: {

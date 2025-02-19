@@ -5,6 +5,6 @@ export class Employee {
   phoneNumber ?: string;
   role !: string;
   salary ?: number;
-  hireDate ?: Date;
+  hireDate ?: string;
   createdAt !: Date;
 }
