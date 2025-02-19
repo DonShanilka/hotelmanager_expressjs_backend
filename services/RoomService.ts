@@ -24,6 +24,7 @@ export async function RoomAdd(room: Room) {
 }
 
 export async function RoomUpdate(id : string, room : Room) {
+  const half = Number(room.hallFloor);
   try {
     const existingRoom = await prisma.room.findUnique({
       where : {roomNumber : id},
@@ -38,7 +39,7 @@ export async function RoomUpdate(id : string, room : Room) {
       data : {
         roomType : room.roomType,
         selectedImage : room.selectedImage,
-        hallFloor : room.hallFloor,
+        hallFloor : half,
         price : room.price,
         status : room.status
       }
