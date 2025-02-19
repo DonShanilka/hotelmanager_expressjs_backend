@@ -65,6 +65,7 @@ model Payment {
   additionalCharges Decimal
   paymentMethod     String
   cashReceive       Decimal
+  
   createdAt         DateTime @default(now())
 
   guest            Guest    @relation(fields: [guestId], references: [guestId])
