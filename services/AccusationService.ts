@@ -24,7 +24,7 @@ export async function AccusationUpdate (id: number, accusation : Accusation) {
       data : {
         reportType : accusation.reportType,
         guestId : accusation.guestId,
-        description : accusation.guestId
+        description : accusation.description
       }
     })
     console.log("Accusation Added: ", accusationUpdate);
