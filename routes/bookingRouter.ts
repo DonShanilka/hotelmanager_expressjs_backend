@@ -2,9 +2,9 @@ import express from 'express'
 const router = express.Router();
 const bookingController = require('../controllers/BookingController');
 
-router.post('/saveBooking', bookingController.saveBooking);
-router.put('/updateBooking/:id', bookingController.updateBooking);
-router.delete('/deleteBooking/:id', bookingController.deleteBooking);
-router.get('/getAllBooking', bookingController.getAllBooking);
+router.post('/bo/saveBooking', bookingController.saveBooking);
+router.put('/bo/updateBooking/:id', bookingController.updateBooking);
+router.delete('/bo/deleteBooking/:id', bookingController.deleteBooking);
+router.get('/bo/getAllBooking', bookingController.getAllBooking);
 
 module.exports = router;

@@ -3,6 +3,7 @@ import { Booking } from "../model/Booking";
 
 
 export async function BookingAdd(booking: Booking) {
+  const totalNight = Number(booking.totalNight);
   try {
     const newBooking = await prisma.booking.create({
       data: {
@@ -11,7 +12,7 @@ export async function BookingAdd(booking: Booking) {
         checkInDate : booking.checkInDate,
         checkOutDate : booking.checkOutDate,
         totalAmount : booking.totalAmount,
-        totalNight : booking.totalNight,
+        totalNight : totalNight,
         bookingStatus : booking.bookingStatus,
         createdAt : booking.createdAt,
       }
