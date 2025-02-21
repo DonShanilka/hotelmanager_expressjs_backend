@@ -37,7 +37,7 @@ model Room {
   price         Decimal
   status        String
 
-  bookings      Booking[]
+  bookings      Booking[] 
   payments      Payment[]
   houseKeepings HouseKeeping[]
 }
@@ -69,8 +69,8 @@ model Payment {
   createdAt         DateTime @default(now())
 
   guest            Guest    @relation(fields: [guestId], references: [guestId])
-  room             Room     @relation(fields: [roomNumber], references: [roomNumber])
-  Booking          Booking? @relation(fields: [bookingBookingID], references: [bookingID])
+  room             Room     @relation(fields: [roomNumber], references: [roomNumber], onDelete: Cascade)
+  Booking          Booking? @relation(fields: [bookingBookingID], references: [bookingID] , onDelete: Cascade) 
   bookingBookingID Int?
 }
 
@@ -116,7 +116,7 @@ model ServiceUsage {
   totalCost Decimal
   usageDate DateTime @default(now())
 
-  Booking Booking @relation(fields: [bookingID], references: [bookingID])
+  Booking Booking @relation(fields: [bookingID], references: [bookingID] , onDelete: Cascade)
   Service Service @relation(fields: [serviceID], references: [serviceID])
   Guest   Guest   @relation(fields: [guestId], references: [guestId])
 }

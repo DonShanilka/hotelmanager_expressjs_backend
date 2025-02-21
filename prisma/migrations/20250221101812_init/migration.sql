@@ -127,10 +127,10 @@ ALTER TABLE `HouseKeeping` ADD CONSTRAINT `HouseKeeping_roomNumber_fkey` FOREIGN
 ALTER TABLE `Payment` ADD CONSTRAINT `Payment_guestId_fkey` FOREIGN KEY (`guestId`) REFERENCES `Guest`(`guestId`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Payment` ADD CONSTRAINT `Payment_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Payment` ADD CONSTRAINT `Payment_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Payment` ADD CONSTRAINT `Payment_bookingBookingID_fkey` FOREIGN KEY (`bookingBookingID`) REFERENCES `Booking`(`bookingID`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Payment` ADD CONSTRAINT `Payment_bookingBookingID_fkey` FOREIGN KEY (`bookingBookingID`) REFERENCES `Booking`(`bookingID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Booking` ADD CONSTRAINT `Booking_guestID_fkey` FOREIGN KEY (`guestID`) REFERENCES `Guest`(`guestId`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -139,7 +139,7 @@ ALTER TABLE `Booking` ADD CONSTRAINT `Booking_guestID_fkey` FOREIGN KEY (`guestI
 ALTER TABLE `Booking` ADD CONSTRAINT `Booking_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `ServiceUsage` ADD CONSTRAINT `ServiceUsage_bookingID_fkey` FOREIGN KEY (`bookingID`) REFERENCES `Booking`(`bookingID`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ServiceUsage` ADD CONSTRAINT `ServiceUsage_bookingID_fkey` FOREIGN KEY (`bookingID`) REFERENCES `Booking`(`bookingID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `ServiceUsage` ADD CONSTRAINT `ServiceUsage_serviceID_fkey` FOREIGN KEY (`serviceID`) REFERENCES `Service`(`serviceID`) ON DELETE RESTRICT ON UPDATE CASCADE;
