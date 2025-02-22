@@ -2,9 +2,9 @@ import express from 'express'
 const router = express.Router();
 const houseKeepingController = require('../controllers/HouseKeepingController');
 
-router.post('/saveHouse', houseKeepingController.saveHouseKeeping);
-router.put('/updateHouse/:id', houseKeepingController.updateHouseKeeping);
-router.delete('/deleteHouse/:id', houseKeepingController.deleteHouseKeeping);
-router.get('/getAllHouse', houseKeepingController.getAllHouseKeeping);
+router.post('/hk/saveHouseKeeping', houseKeepingController.saveHouseKeeping);
+router.put('/hk/updateHouseKeeping/:id', houseKeepingController.updateHouseKeeping);
+router.delete('/hk/deleteHouseKeeping/:id', houseKeepingController.deleteHouseKeeping);
+router.get('/hk/getAllHouseKeeping', houseKeepingController.getAllHouseKeeping);
 
 module.exports = router;
