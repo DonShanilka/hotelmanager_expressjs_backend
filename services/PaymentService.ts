@@ -4,6 +4,8 @@ import { Payment } from "../model/Payment";
 
 export async function PaymentAdd(payment : Payment) {
   try {
+    const totalN = Number(payment.totalNight);
+    const bookingId = Number(payment.bookingBookingID);
     const newService = await prisma.payment.create({
       data: {
         roomNumber : payment.roomNumber,
@@ -11,13 +13,13 @@ export async function PaymentAdd(payment : Payment) {
         guestName : payment.guestName,
         checkInDate : payment.checkInDate,
         checkOutDate : payment.checkOutDate,
-        totalNight : payment.totalNight,
+        totalNight : totalN,
         roomPerNight : payment.roomPerNight,
         additionalCharges : payment.additionalCharges,
         paymentMethod : payment.paymentMethod,
         cashReceive : payment.cashReceive,
         createdAt : payment.createdAt,
-        bookingBookingID : payment.bookingBookingID
+        bookingBookingID : bookingId
       },
     });
     console.log("Payment Added Successfully:", newService);
