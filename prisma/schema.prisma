@@ -131,3 +131,8 @@ model Employee {
   hireDate     String?
   createdAt    DateTime @default(now())
 }
+
+model User {
+  userEmail String          @id @unique
+  password  String
+}

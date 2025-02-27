@@ -13,10 +13,19 @@ const employeeRouter = require('./routes/employeeRouter');
 const houseKeepingRouter = require('./routes/houseKeepingRouter');
 const paymentRouter = require('./routes/paymentRouter');
 const usageRouter = require('./routes/usageRouter');
+import AuthController, {authenticationToken} from "./controllers/AuthController";
 
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
 app.use(fileUpload());
+
+app.use('/',(req : any, res : any, next : any)=>{
+  res.header('Access-Control-Allow-Origin',"*");
+  res.header('Access-Control-Allow-Methods',"GET,PUT,POST,DELETE,OPTIONS");
+  res.header('Access-Control-Allow-Headers',"Origin,X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
@@ -30,6 +39,7 @@ app.use('/api', employeeRouter);
 app.use('/api', houseKeepingRouter);
 app.use('/api', paymentRouter);
 app.use('/api', usageRouter);
+app.use('/auth',AuthController)
 
 // app.use("/downloads", express.static("downloads"));
 
