@@ -2,15 +2,17 @@ import express from "express";
 import {AddUser, verifyUser} from "../services/AuthService";
 import {Auth} from "../model/Auth";
 import jwt, { Secret } from 'jsonwebtoken';
+import { User } from "@prisma/client";
 
 const router = express.Router();
 
 router.post('/addUser',async (req,res)=>{
-    const user = req.body;
+    const user:Auth = req.body;
     console.log("Received User :",user);
 
     try {
         const saveUser = await AddUser(user);
+        
         res.status(201).send("User Created");
     }catch (err){
         console.log("Error during user saving :", err);

@@ -39,7 +39,7 @@ app.use('/api', employeeRouter);
 app.use('/api', houseKeepingRouter);
 app.use('/api', paymentRouter);
 app.use('/api', usageRouter);
-app.use('/auth',AuthController)
+app.use('/api/auth',AuthController)
 
 // app.use("/downloads", express.static("downloads"));
 
