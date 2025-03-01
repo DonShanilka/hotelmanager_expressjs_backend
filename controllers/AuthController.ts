@@ -25,11 +25,12 @@ router.post('/login',async (req,res)=>{
     const password = req.body.password;
 
     const user:Auth = {userEmail,password};
+
     try {
-        const isVerified =await verifyUser(user);
+        const isVerified = await verifyUser(user);
         if (isVerified){
-            const access_token = jwt.sign({userEmail},process.env.ACCESS_TOKEN as Secret,{expiresIn:"1m"});
-            const refreshToken = jwt.sign({userEmail},process.env.REFRESH_TOKEN as Secret,{expiresIn:"7d"})
+            const access_token = jwt.sign({userEmail},process.env.ACCESS_TOKEN as Secret,{expiresIn:"1m"}); // access = logUna gaman dehnne
+            const refreshToken = jwt.sign({userEmail},process.env.REFRESH_TOKEN as Secret,{expiresIn:"7d"}) // refresh = 7n 7ta token hadhenawa
             res.json({accessToken:access_token, refreshToken:refreshToken});
             console.log(access_token)
         }else {

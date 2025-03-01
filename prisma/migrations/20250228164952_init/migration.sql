@@ -120,6 +120,15 @@ CREATE TABLE `Employee` (
     PRIMARY KEY (`employeeID`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `User` (
+    `userEmail` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `User_userEmail_key`(`userEmail`),
+    PRIMARY KEY (`userEmail`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `HouseKeeping` ADD CONSTRAINT `HouseKeeping_roomNumber_fkey` FOREIGN KEY (`roomNumber`) REFERENCES `Room`(`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
