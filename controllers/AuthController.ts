@@ -29,6 +29,7 @@ router.post('/login',async (req,res)=>{
     try {
         const isVerified = await verifyUser(user);
         if (isVerified){
+            // user Email ekata anuwa token dheka genarate karanawa
             const access_token = jwt.sign({userEmail},process.env.ACCESS_TOKEN as Secret,{expiresIn:"1m"}); // access = logUna gaman dehnne
             const refreshToken = jwt.sign({userEmail},process.env.REFRESH_TOKEN as Secret,{expiresIn:"7d"}) // refresh = 7n 7ta token hadhenawa
             res.json({accessToken:access_token, refreshToken:refreshToken});
@@ -56,6 +57,7 @@ router.post("/refresh-token", async (req, res) => {
         res.status(401).json(err);
     }
 });
+
 
 export function authenticationToken(req:express.Request,res:express.Response,next:express.NextFunction){
     const authHeader = req.headers.authorization;
