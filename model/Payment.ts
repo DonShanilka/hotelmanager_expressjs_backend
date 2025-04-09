@@ -9,6 +9,7 @@ export class Payment {
   roomPerNight !: number;
   additionalCharges !: number;
   paymentMethod !: string;
+  totalPayment !: number;
   cashReceive !: number;
   createdAt !: Date;
   bookingBookingID !: number;

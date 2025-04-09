@@ -64,6 +64,7 @@ model Payment {
   roomPerNight      Decimal
   additionalCharges Decimal
   paymentMethod     String
+  totalPayment      Decimal
   cashReceive       Decimal
   
   createdAt         DateTime @default(now())
