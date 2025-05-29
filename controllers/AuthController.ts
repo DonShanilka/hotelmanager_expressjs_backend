@@ -25,11 +25,13 @@ router.post('/login',async (req,res)=>{
     const password = req.body.password;
 
     const user:Auth = {userEmail,password};
+
     try {
-        const isVerified =await verifyUser(user);
+        const isVerified = await verifyUser(user);
         if (isVerified){
-            const access_token = jwt.sign({userEmail},process.env.ACCESS_TOKEN as Secret,{expiresIn:"1m"});
-            const refreshToken = jwt.sign({userEmail},process.env.REFRESH_TOKEN as Secret,{expiresIn:"7d"})
+            // user Email ekata anuwa token dheka genarate karanawa
+            const access_token = jwt.sign({userEmail},process.env.ACCESS_TOKEN as Secret,{expiresIn:"1m"}); // access = logUna gaman dehnne
+            const refreshToken = jwt.sign({userEmail},process.env.REFRESH_TOKEN as Secret,{expiresIn:"7d"}) // refresh = 7n 7ta token hadhenawa
             res.json({accessToken:access_token, refreshToken:refreshToken});
             console.log(access_token)
         }else {
@@ -47,6 +49,7 @@ router.post("/refresh-token", async (req, res) => {
     if(!refresh_token)res.status(401).send('No token provided');
 
     try{
+        console.log()
         const payload = jwt.verify(refresh_token as string, process.env.REFRESH_TOKEN as Secret) as {username: string, iat: number};
         const token = jwt.sign({ username: payload.username }, process.env.ACCESS_TOKEN as Secret, {expiresIn: "1m"});
         res.json({accessToken : token});
@@ -55,6 +58,7 @@ router.post("/refresh-token", async (req, res) => {
         res.status(401).json(err);
     }
 });
+
 
 export function authenticationToken(req:express.Request,res:express.Response,next:express.NextFunction){
     const authHeader = req.headers.authorization;
