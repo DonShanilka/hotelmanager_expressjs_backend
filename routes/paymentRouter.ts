@@ -8,4 +8,4 @@ router.put('/payment/updatePayment/:id', paymentController.updatePayment);
 router.delete('/payment/deletePayment/:id', paymentController.deletePayment);
 router.get('/payment/getAllPayment', paymentController.getAllPayment);
 
-module.exports = router;
+export default router;

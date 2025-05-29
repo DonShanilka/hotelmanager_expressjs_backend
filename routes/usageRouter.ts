@@ -7,4 +7,4 @@ router.put('/sU/updateUsage/:id', usageController.updateUsage);
 router.delete('/sU/deleteUsage/:id', usageController.deleteUsage);
 router.get('/sU/getAllUsage', usageController.getAllUsage);
 
-module.exports = router;
+export default router;

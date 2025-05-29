@@ -8,4 +8,4 @@ router.put('/room/updateRoom/:id', roomController.updateRoom);
 router.delete('/room/deleteRoom/:id', roomController.deletRoom);
 router.get('/room/getAllRoom', roomController.getAllRooms);
 
-module.exports = router;
+export default router;

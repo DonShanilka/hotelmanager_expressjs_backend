@@ -8,4 +8,4 @@ router.put('/acc/updateAccusation/:id', accusationController.updateAccusation);
 router.delete('/acc/deleteAccusation/:id', accusationController.deleteAccusation);
 router.get('/acc/getAllAccusation', accusationController.getAllAccusation);
 
-module.exports = router;
+export default router;

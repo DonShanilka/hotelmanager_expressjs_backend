@@ -7,4 +7,4 @@ router.put('/bo/updateBooking/:id', bookingController.updateBooking);
 router.delete('/bo/deleteBooking/:id', bookingController.deleteBooking);
 router.get('/bo/getAllBooking', bookingController.getAllBooking);
 
-module.exports = router;
+export default router;
