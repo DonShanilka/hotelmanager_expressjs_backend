@@ -7,4 +7,4 @@ router.put('/gu/updateGuest/:id', guestController.update);
 router.delete('/gu/deleteGuest/:id', guestController.delete);
 router.get('/gu/getAllGuest', guestController.getAll);
 
-export default router;
+module.exports = router;

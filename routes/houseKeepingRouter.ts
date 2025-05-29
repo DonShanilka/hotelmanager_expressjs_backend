@@ -7,4 +7,4 @@ router.put('/hk/updateHouseKeeping/:id', houseKeepingController.updateHouseKeepi
 router.delete('/hk/deleteHouseKeeping/:id', houseKeepingController.deleteHouseKeeping);
 router.get('/hk/getAllHouseKeeping', houseKeepingController.getAllHouseKeeping);
 
-export default router;
+module.exports = router;

@@ -7,4 +7,4 @@ router.put('/service/updateService/:id', serviceController.updateService);
 router.delete('/service/deleteService/:id', serviceController.deleteService);
 router.get('/service/getAllService', serviceController.getAllService);
 
-export default router;
+module.exports = router;

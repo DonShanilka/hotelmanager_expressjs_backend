@@ -7,4 +7,4 @@ router.put('/emp/updateEmployee/:id', employeeController.updateEmployee);
 router.delete('/emp/deleteEmployee/:id', employeeController.deleteEmployee);
 router.get('/emp/getAllEmployee', employeeController.getAllEmployee);
 
-export default router;
+module.exports = router;
