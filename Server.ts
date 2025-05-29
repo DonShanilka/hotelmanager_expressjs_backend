@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 import fileUpload from "express-fileupload";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const guestRouters = require('./routes/guestRouter');
 const accusationRouters = require('./routes/AccusationRouter');
