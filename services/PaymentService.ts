@@ -6,6 +6,7 @@ export async function PaymentAdd(payment : Payment) {
   try {
     const totalN = Number(payment.totalNight);
     const bookingId = Number(payment.bookingBookingID);
+    const totalPayment = Number(payment.totalPayment);
     const newService = await prisma.payment.create({
       data: {
         roomNumber : payment.roomNumber,
@@ -17,6 +18,7 @@ export async function PaymentAdd(payment : Payment) {
         roomPerNight : payment.roomPerNight,
         additionalCharges : payment.additionalCharges,
         paymentMethod : payment.paymentMethod,
+        totalPayment: totalPayment,
         cashReceive : payment.cashReceive,
         createdAt : payment.createdAt,
         bookingBookingID : bookingId

@@ -49,6 +49,7 @@ router.post("/refresh-token", async (req, res) => {
     if(!refresh_token)res.status(401).send('No token provided');
 
     try{
+        console.log()
         const payload = jwt.verify(refresh_token as string, process.env.REFRESH_TOKEN as Secret) as {username: string, iat: number};
         const token = jwt.sign({ username: payload.username }, process.env.ACCESS_TOKEN as Secret, {expiresIn: "1m"});
         res.json({accessToken : token});
