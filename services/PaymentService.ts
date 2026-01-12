@@ -19,6 +19,7 @@ export async function PaymentAdd(payment : Payment) {
         additionalCharges : payment.additionalCharges,
         paymentMethod : payment.paymentMethod,
         cashReceive : payment.cashReceive,
+        totalPayment : totalPayment,
         createdAt : payment.createdAt,
         bookingBookingID : bookingId
       },
