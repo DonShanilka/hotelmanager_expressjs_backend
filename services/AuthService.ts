@@ -18,23 +18,18 @@ export async function AddUser(auth: Auth) {
     }
 }
 
-export async function verifyUser(verify: Auth) {
-  // 1️⃣ Find user by email ONLY
+export async function verifyUser(verify:Auth){
+
   const user = await prisma.user.findUnique({
     where: { userEmail: verify.userEmail },
   });
 
-  if (!user) {
-    return null; // user not found
-  }
+  if (!user) return false;
 
-  // 2️⃣ Compare password
-  const isValid = await bcrypt.compare(verify.password, user.password);
+  const isPasswordValid = await bcrypt.compare(verify.password, user.password);
+  if (!isPasswordValid) return false;
 
-  if (!isValid) {
-    return null; // wrong password
-  }
+  if (verify.rolle && verify.rolle !== user.rolle) return false;
 
-  // 3️⃣ Return user (includes role)
   return user;
 }
