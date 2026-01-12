@@ -136,4 +136,5 @@ model Employee {
 model User {
   userEmail String          @id @unique
   password  String
+  rolle     String
 }

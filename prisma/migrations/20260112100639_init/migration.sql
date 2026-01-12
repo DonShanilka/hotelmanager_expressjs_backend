@@ -125,6 +125,7 @@ CREATE TABLE `Employee` (
 CREATE TABLE `User` (
     `userEmail` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `rolle` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `User_userEmail_key`(`userEmail`),
     PRIMARY KEY (`userEmail`)

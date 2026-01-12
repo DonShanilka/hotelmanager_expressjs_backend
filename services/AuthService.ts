@@ -9,6 +9,7 @@ export async function AddUser(auth: Auth) {
             data: {
                 userEmail:auth.userEmail,
                 password:hashPassword,
+                rolle:auth.rolle
             }
         })
         console.log("User saved : ", newUser)
